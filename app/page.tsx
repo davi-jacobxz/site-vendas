@@ -133,9 +133,9 @@ export default function Home() {
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">Prazer, eu sou o Jacob.</h2>
             <p className="mt-4 text-sm font-bold text-white/50">Ribeirão Preto — SP, Brasil</p>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/60">
-              Sou o responsável pela criação e desenvolvimento dos projetos da JACOB. Meu trabalho é transformar a necessidade de cada negócio em um site claro, moderno e funcional. Experiência profissional: [PREENCHER]. Especialidades: [PREENCHER].
+              Sou o responsável pela criação e desenvolvimento dos projetos da JACOB. Minha experiência é prática em desenvolvimento de sites e landing pages para negócios, com foco em transformar uma necessidade comercial em uma presença digital clara, moderna e funcional.
             </p>
-            <p className="mt-4 max-w-2xl leading-8 text-white/45">Atendimento e processo de trabalho: [PREENCHER]. Diferenciais comprováveis: [PREENCHER].</p>
+            <p className="mt-4 max-w-2xl leading-8 text-white/45">Especialidades: landing pages, sites institucionais, páginas para serviços, layouts responsivos, integração com WhatsApp, publicação na web e configurações básicas de SEO. Atendimento e processo de trabalho: começo entendendo o negócio e o objetivo do projeto, defino a estrutura, desenvolvo a interface, faço os ajustes combinados e publico o site. Diferenciais: atendimento direto comigo, projetos desenvolvidos sob medida, comunicação clara sobre escopo e etapas, e foco em uma experiência que funcione bem no celular. O portfólio desta página reúne projetos desenvolvidos para demonstrar o trabalho na prática.</p>
           </div>
         </div>
       </section>
