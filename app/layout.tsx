@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     "websites",
     "JACOB",
   ],
+  verification: {
+    google: "Qm0xRLA1kJjQAVjDoViw8BTRM4_Tu5BcK125uFtznS0",
+  },
   openGraph: {
     title: "JACOB. | Websites & Digital",
     description:
