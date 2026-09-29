@@ -11,7 +11,7 @@ const WA="5516992445413";
 const wa=(text:string)=>`https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
 const track=(name:string,params:Record<string,unknown>={})=>{
   if(typeof window==="undefined")return;
-  (window as typeof window & {gtag?:Function}).gtag?.("event",name,params);
+  (window as typeof window & {gtag?:Function}).gtag?.("event",name,params);window.dispatchEvent(new CustomEvent("jacob:track",{detail:{name,params}}));
 };
 
 const pains=[
