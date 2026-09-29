@@ -4,193 +4,40 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-const questions = [
-  {
-    question: "Quanto custa um site?",
-    answer:
-      "Os projetos começam a partir de R$497. O valor final depende da estrutura, quantidade de páginas, funcionalidades e necessidades específicas do projeto.",
-  },
-  {
-    question: "O que está incluso no projeto?",
-    answer:
-      "O projeto pode incluir design personalizado, desenvolvimento, versão para celular, integração com WhatsApp, configurações básicas de SEO e publicação do site.",
-  },
-  {
-    question: "Preciso ter um domínio?",
-    answer:
-      "Não. Se você ainda não tiver um domínio, podemos orientar você sobre o processo de registro e configuração.",
-  },
-  {
-    question: "O site funciona no celular?",
-    answer:
-      "Sim. Os sites são desenvolvidos para se adaptar a diferentes tamanhos de tela, incluindo celulares, tablets e computadores.",
-  },
-  {
-    question: "Quanto tempo demora para ficar pronto?",
-    answer:
-      "O prazo depende do tamanho e da complexidade do projeto. Depois de entendermos o que você precisa, podemos definir um prazo para o seu caso.",
-  },
-  {
-    question: "Posso pedir alterações no projeto?",
-    answer:
-      "Sim. O projeto é alinhado com você durante o desenvolvimento para que o resultado final esteja de acordo com a proposta definida.",
-  },
-  {
-    question: "Como funciona o pagamento?",
-    answer:
-      "A forma de pagamento é combinada de acordo com o projeto e apresentada junto com a proposta.",
-  },
-  {
-    question: "Como faço para começar?",
-    answer:
-      "Você pode começar pelo simulador acima. Depois, envie seus dados e entre em contato pelo WhatsApp para conversarmos sobre o projeto.",
-  },
+const questions=[
+ {question:"Quanto custa um site?",answer:"O valor público de entrada é a partir de R$497 para uma Landing Page. Valores de Página Profissional, Site Completo e Catálogo/Loja precisam ser definidos conforme o escopo real: [PREENCHER]."},
+ {question:"O que está incluso?",answer:"O escopo pode incluir estrutura visual, desenvolvimento responsivo, integração com WhatsApp, configurações básicas de SEO e publicação. O que exatamente entra em cada pacote deve seguir a proposta aprovada: [PREENCHER]."},
+ {question:"Domínio e hospedagem estão inclusos?",answer:"Domínio e hospedagem podem ter custos recorrentes. Quem registra/paga esses serviços, quais provedores serão usados e os custos anuais precisam ser definidos: [PREENCHER]."},
+ {question:"Quanto tempo demora?",answer:"O prazo varia conforme o projeto e o envio dos materiais. Os prazos estimados por etapa precisam ser definidos: [PREENCHER]."},
+ {question:"Quantas alterações posso pedir?",answer:"A quantidade de rodadas de ajustes deve ser definida no escopo de cada pacote: [PREENCHER]."},
+ {question:"Como funciona o pagamento?",answer:"A forma e o momento do pagamento precisam ser definidos na proposta comercial: [PREENCHER]."},
+ {question:"O que preciso enviar?",answer:"Normalmente são úteis logo, textos, fotos, informações dos serviços, contatos, endereço, redes sociais e referências visuais. O checklist final do projeto deve ser definido: [PREENCHER]."},
+ {question:"Você dá suporte depois da publicação?",answer:"As condições, período e limites do suporte pós-publicação precisam ser definidos: [PREENCHER]."},
 ];
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  function toggleQuestion(index: number) {
-    setOpenIndex((current) =>
-      current === index ? null : index
-    );
-  }
-
-  return (
-    <section
-      id="faq"
-      className="border-t border-white/5 bg-[#0b0b0b] px-6 py-28 lg:px-8"
-    >
-      <div className="mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 max-w-3xl"
-        >
-          <span className="text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
-            Dúvidas
-          </span>
-
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
-            Tudo o que você precisa{" "}
-            <span className="text-orange-500">
-              saber.
-            </span>
-          </h2>
-
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/50">
-            Algumas respostas para as principais dúvidas antes
-            de começar seu projeto.
-          </p>
-        </motion.div>
-
-        <div className="space-y-3">
-          {questions.map((item, index) => {
-            const isOpen = openIndex === index;
-
-            return (
-              <motion.div
-                key={item.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.04,
-                }}
-                className={`overflow-hidden rounded-2xl border transition ${
-                  isOpen
-                    ? "border-orange-500/25 bg-orange-500/[0.04]"
-                    : "border-white/10 bg-white/[0.025]"
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleQuestion(index)}
-                  className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left sm:px-7 sm:py-6"
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-base font-medium text-white sm:text-lg">
-                    {item.question}
-                  </span>
-
-                  <span
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition ${
-                      isOpen
-                        ? "border-orange-500/30 bg-orange-500 text-white"
-                        : "border-white/10 bg-white/[0.03] text-white/50"
-                    }`}
-                  >
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </span>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{
-                        height: 0,
-                        opacity: 0,
-                      }}
-                      animate={{
-                        height: "auto",
-                        opacity: 1,
-                      }}
-                      exit={{
-                        height: 0,
-                        opacity: 0,
-                      }}
-                      transition={{ duration: 0.25 }}
-                    >
-                      <div className="px-6 pb-6 sm:px-7">
-                        <p className="max-w-3xl leading-7 text-white/45">
-                          {item.answer}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-12 rounded-3xl border border-orange-500/20 bg-orange-500/[0.06] p-7 sm:p-9"
-        >
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-xl font-semibold">
-                Ainda ficou com alguma dúvida?
-              </p>
-
-              <p className="mt-2 text-sm leading-6 text-white/40">
-                Podemos conversar sobre o seu projeto e entender
-                exatamente o que você precisa.
-              </p>
-            </div>
-
-            <a
-              href="#orcamento"
-              className="inline-flex shrink-0 items-center justify-center rounded-full bg-orange-500 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-400"
-            >
-              Simular meu projeto
-            </a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+export default function FAQ(){
+ const [open,setOpen]=useState<number|null>(null);
+ return <section id="faq" className="border-t border-white/5 bg-[#0b0b0b] px-5 py-24 sm:px-8">
+  <div className="mx-auto max-w-5xl">
+   <span className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Dúvidas</span>
+   <h2 className="mt-4 text-4xl font-black sm:text-5xl">Antes de começar, saiba como funciona.</h2>
+   <div className="mt-10 space-y-3">
+    {questions.map((item,index)=>{
+     const isOpen=open===index;
+     return <motion.div key={item.question} initial={{opacity:0,y:15}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[.025]">
+      <button type="button" aria-expanded={isOpen} onClick={()=>setOpen(isOpen?null:index)} className="flex min-h-16 w-full items-center justify-between gap-5 px-5 py-4 text-left sm:px-7">
+       <span className="font-bold">{item.question}</span>
+       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10"><ChevronDown size={18} className={isOpen?"rotate-180":""}/></span>
+      </button>
+      <AnimatePresence initial={false}>{isOpen&&<motion.div initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}}><p className="px-5 pb-6 leading-7 text-white/45 sm:px-7">{item.answer}</p></motion.div>}</AnimatePresence>
+     </motion.div>
+    })}
+   </div>
+   <div className="mt-10 rounded-3xl border border-[#F76303]/20 bg-[#F76303]/[.06] p-7 text-center">
+    <p className="font-black">Ainda ficou com alguma dúvida?</p>
+    <p className="mt-2 text-sm text-white/40">Faça a simulação e converse comigo sem compromisso.</p>
+    <a href="#orcamento" className="mt-5 inline-flex min-h-11 items-center rounded-full bg-[#F76303] px-6 py-3 font-black">Simular meu site</a>
+   </div>
+  </div>
+ </section>;
 }
