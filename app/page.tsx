@@ -161,9 +161,9 @@ export default function Home() {
           <p className="mt-4 max-w-2xl text-white/45">O valor de entrada conhecido hoje é R$497. Onde não houver preço ou condição comercial definida, deixei [PREENCHER].</p>
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {[
-              ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "[PREENCHER]"],
-              ["Página Profissional", "A partir de R$797", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "[PREENCHER]"],
-              ["Site Completo", "A partir de R$1.197", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "[PREENCHER]"],
+              ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "Domínio e hospedagem pagos à parte; funcionalidades fora do escopo combinado."],
+              ["Página Profissional", "A partir de R$697", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "Domínio e hospedagem pagos à parte; textos, fotos e funcionalidades fora do escopo combinado."],
+              ["Site Completo", "A partir de R$897", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "Domínio e hospedagem pagos à parte; sistemas complexos, integrações especiais e conteúdo produzido do zero não inclusos no valor inicial."],
             ].map(([name, price, deadline, items, excluded]) => (
               <div key={String(name)} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
                 <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">{name}</p>
