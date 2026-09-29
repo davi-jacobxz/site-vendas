@@ -162,8 +162,8 @@ export default function Home() {
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {[
               ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "[PREENCHER]"],
-              ["Página Profissional", "[PREENCHER preço]", "[PREENCHER prazo]", ["Estrutura para negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "[PREENCHER]"],
-              ["Site Completo", "[PREENCHER preço]", "[PREENCHER prazo]", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "[PREENCHER]"],
+              ["Página Profissional", "A partir de R$797", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "[PREENCHER]"],
+              ["Site Completo", "A partir de R$1.197", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "[PREENCHER]"],
             ].map(([name, price, deadline, items, excluded]) => (
               <div key={String(name)} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
                 <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">{name}</p>
