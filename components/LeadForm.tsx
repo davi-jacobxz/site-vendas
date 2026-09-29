@@ -59,38 +59,35 @@ export default function LeadForm() {
       return;
     }
 
-    // GA4: registra o lead diretamente na fila do Google Tag.
-    // Usamos dataLayer + debug_mode para garantir que o evento seja
-    // enviado mesmo se o gtag ainda estiver carregando.
+    // GA4: envia o lead usando gtag.js oficial.
+    // debug_mode permite conferir o evento no DebugView.
     if (typeof window !== "undefined") {
       const win = window as typeof window & {
-        dataLayer?: unknown[];
+        gtag?: (
+          command: string,
+          eventName: string,
+          params?: Record<string, unknown>
+        ) => void;
       };
 
-      win.dataLayer = win.dataLayer || [];
+      if (typeof win.gtag === "function") {
+        console.log("[GA4] Enviando generate_lead");
 
-      console.log("[GA4] Enviando generate_lead");
-
-      win.dataLayer.push([
-        "event",
-        "generate_lead",
-        {
+        win.gtag("event", "generate_lead", {
           currency: "BRL",
           value: 497,
           lead_source: "site",
           debug_mode: true,
-        },
-      ]);
+        });
 
-      win.dataLayer.push([
-        "event",
-        "lead_form_submit",
-        {
+        win.gtag("event", "lead_form_submit", {
           event_category: "lead",
           event_label: "Formulário de orçamento",
           debug_mode: true,
-        },
-      ]);
+        });
+      } else {
+        console.warn("[GA4] gtag ainda não está disponível.");
+      }
     }
 
     const dominio =
