@@ -14,35 +14,27 @@ export default function LeadForm() {
   const [whatsapp, setWhatsapp] = useState("");
 
   const [dadosSimulador] = useState(() => {
+    const dadosPadrao = {
+      business: "",
+      website: "",
+      domain: "",
+      whatsapp: "",
+    };
+
     if (typeof window === "undefined") {
-      return {
-        business: "",
-        website: "",
-        domain: "",
-        whatsapp: "",
-      };
+      return dadosPadrao;
     }
 
     const dados = sessionStorage.getItem("orcamento");
 
     if (!dados) {
-      return {
-        business: "",
-        website: "",
-        domain: "",
-        whatsapp: "",
-      };
+      return dadosPadrao;
     }
 
     try {
       return JSON.parse(dados);
     } catch {
-      return {
-        business: "",
-        website: "",
-        domain: "",
-        whatsapp: "",
-      };
+      return dadosPadrao;
     }
   });
 
@@ -67,6 +59,18 @@ export default function LeadForm() {
       return;
     }
 
+    // Evento de lead no Google Analytics
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (
+        window as typeof window & {
+          gtag?: (...args: unknown[]) => void;
+        }
+      ).gtag?.("event", "lead_form_submit", {
+        event_category: "lead",
+        event_label: "Formulário de orçamento",
+      });
+    }
+
     const dominio =
       dadosSimulador.domain || "Não informado";
 
@@ -78,16 +82,19 @@ export default function LeadForm() {
 *DADOS DO CLIENTE*
 
 Nome: ${nome}
+
 WhatsApp: ${whatsapp}
 
 *PROJETO*
 
 Tipo de negócio: ${negocio}
+
 Tipo de site: ${site}
 
 *INFORMAÇÕES DO SIMULADOR*
 
 Domínio: ${dominio}
+
 Integração com WhatsApp: ${whatsappSite}
 
 *ORÇAMENTO*
@@ -108,17 +115,7 @@ Gostaria de receber uma proposta.`;
       mensagem
     )}`;
 
-    if (typeof window !== "undefined" && "gtag" in window) {
-      (
-        window as typeof window & {
-          gtag?: (...args: unknown[]) => void;
-        }
-      ).gtag?.("event", "lead_form_submit", {
-        event_category: "lead",
-        event_label: "Formulário de orçamento",
-      });
-    }
-
+    // Evento específico para o encaminhamento ao WhatsApp
     if (typeof window !== "undefined" && "gtag" in window) {
       (
         window as typeof window & {
@@ -298,9 +295,7 @@ Gostaria de receber uma proposta.`;
                   }
                   className="w-full rounded-xl border border-white/10 bg-black px-4 py-3.5 text-white outline-none transition focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20"
                 >
-                  <option value="">
-                    Selecione
-                  </option>
+                  <option value="">Selecione</option>
 
                   <option value="Restaurante">
                     Restaurante
@@ -341,9 +336,7 @@ Gostaria de receber uma proposta.`;
                   }
                   className="w-full rounded-xl border border-white/10 bg-black px-4 py-3.5 text-white outline-none transition focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20"
                 >
-                  <option value="">
-                    Selecione
-                  </option>
+                  <option value="">Selecione</option>
 
                   <option value="Landing page">
                     Landing page
@@ -429,7 +422,7 @@ Gostaria de receber uma proposta.`;
               />
             </button>
 
-            {/* SEGURANÇA / REDUÇÃO DE ATRITO */}
+            {/* SEGURANÇA */}
             <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs text-white/25">
               <ShieldCheck size={15} />
 

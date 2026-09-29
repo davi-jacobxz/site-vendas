@@ -19,6 +19,7 @@ export default function Home() {
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
+  // Rastreamento de cliques no WhatsApp pelo Google Analytics
   const handleWhatsAppClick = () => {
     if (typeof window !== "undefined" && "gtag" in window) {
       (
@@ -82,6 +83,7 @@ export default function Home() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
+            onClick={handleWhatsAppClick}
             className="inline-flex items-center gap-2 rounded-full bg-[#F76303] px-4 py-2.5 text-sm font-semibold text-white md:hidden"
           >
             <MessageCircle size={16} />
@@ -123,9 +125,11 @@ export default function Home() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
+                onClick={handleWhatsAppClick}
                 className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#F76303] px-7 py-4 font-bold text-white transition hover:scale-[1.02] hover:bg-[#ff6f18]"
               >
                 Quero meu site
+
                 <ArrowRight
                   size={19}
                   className="transition-transform group-hover:translate-x-1"
@@ -209,6 +213,7 @@ export default function Home() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
+            onClick={handleWhatsAppClick}
             className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#F76303] px-7 py-4 font-bold transition hover:scale-105 hover:bg-[#ff6f18]"
           >
             <MessageCircle size={19} />
@@ -249,9 +254,11 @@ export default function Home() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
+            onClick={handleWhatsAppClick}
             className="group mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-[#F76303] px-8 py-4 font-bold text-white shadow-lg shadow-[#F76303]/20 transition hover:scale-[1.03] hover:bg-[#ff6f18]"
           >
             Quero criar meu site
+
             <ArrowRight
               size={19}
               className="transition-transform group-hover:translate-x-1"
