@@ -49,7 +49,7 @@ function getScore(a:Answers){
 
 function estimate(a:Answers){
   if(a.website==="Landing page") return "A partir de R$497";
-  return "[PREENCHER faixa de preço]";
+  return "A partir de R$697";
 }
 
 export default function Simulator(){
