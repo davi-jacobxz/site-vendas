@@ -20,7 +20,7 @@ const pains=[
   ["03","Você perde contatos no caminho.","Um site bem estruturado cria um ponto central para receber quem já demonstrou interesse."]
 ];
 
-const packages=[
+const packages: [string, string, string[]][] = [
   ["Landing Page","A partir de R$497",["Página focada em uma oferta","Responsiva","WhatsApp","Publicação"]],
   ["Página Profissional","Sob proposta",["Estrutura para negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"]],
   ["Site Completo","Sob proposta",["Estrutura completa","Mais páginas e funcionalidades","Integrações conforme necessidade","SEO básico","Publicação"]]
