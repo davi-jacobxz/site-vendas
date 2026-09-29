@@ -12,7 +12,7 @@ const budgets=["R$500 a R$1.000","R$1.000 a R$2.000","Acima de R$2.000","Prefiro
 const empty={business:"",website:"",current:"",deadline:"",budget:"",name:"",whatsapp:"",email:"",notes:"",otherBusiness:""};
 type Answers=typeof empty;
 
-const track=(name:string,params:Record<string,unknown>={})=>{if(typeof window==="undefined")return;(window as typeof window & {gtag?:Function}).gtag?.("event",name,params)};
+const track=(name:string,params:Record<string,unknown>={})=>{if(typeof window==="undefined")return;(window as typeof window & {gtag?:Function}).gtag?.("event",name,params);window.dispatchEvent(new CustomEvent("jacob:track",{detail:{name,params}}))};
 const digits=(v:string)=>v.replace(/\D/g,"").slice(0,11);
 const mask=(v:string)=>{const n=digits(v);if(n.length<=2)return n?"("+n:"";if(n.length<=7)return "("+n.slice(0,2)+") "+n.slice(2);return "("+n.slice(0,2)+") "+n.slice(2,7)+"-"+n.slice(7)};
 
@@ -35,7 +35,7 @@ export default function Simulator(){
   const body={nome:answers.name.trim(),whatsapp:digits(answers.whatsapp),email:answers.email.trim()||null,negocio:answers.business==="Outro"?answers.otherBusiness.trim():answers.business,site:answers.website,orcamento:answers.budget,prazo:answers.deadline,observacoes:answers.notes.trim()||null,score,partial,consent_lgpd:true,consent_at:new Date().toISOString(),honeypot,...attribution()};
   const res=await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}),data=await res.json();if(!res.ok)throw new Error(data.error||"Não foi possível salvar seus dados.");return data;
  }
- async function next(){if(!can)return;setError("");track("simulador_etapa_"+step,{step});if(step<6){setStep(s=>s+1);return}setLoading(true);try{await save(false);setSaved(true);track("generate_lead",{currency:"BRL",value:497});track("lead",{lead_source:"simulador"})}catch(e){setError(e instanceof Error?e.message:"Não foi possível enviar. Tente novamente.")}finally{setLoading(false)}}
+ async function next(){if(!can)return;setError("");track("simulador_etapa_"+step,{step});if(step===1)track("simulador_iniciado",{location:"simulador"});if(step<6){setStep(s=>s+1);return}setLoading(true);try{await save(false);setSaved(true);track("generate_lead",{currency:"BRL",value:497});track("lead",{lead_source:"simulador"})}catch(e){setError(e instanceof Error?e.message:"Não foi possível enviar. Tente novamente.")}finally{setLoading(false)}}
  async function partial(){if(answers.name.trim()&&digits(answers.whatsapp).length===11&&!saved)try{await save(true)}catch{}}
  const msg="Olá! Sou "+answers.name+". Quero falar sobre um site para meu negócio. Negócio: "+(answers.business==="Outro"?answers.otherBusiness:answers.business)+". Site: "+answers.website+". Prazo: "+answers.deadline+".";
  const whats="https://wa.me/5516992445413?text="+encodeURIComponent(msg);
