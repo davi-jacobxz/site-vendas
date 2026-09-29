@@ -59,9 +59,8 @@ export default function LeadForm() {
       return;
     }
 
-    // Registra o lead no Google Analytics.
-    // Usamos dois nomes: "generate_lead" (evento recomendado pelo GA4)
-    // e "lead_form_submit" (evento específico do nosso formulário).
+    // Rastreamento do envio do formulário.
+    // O generate_lead é o evento recomendado pelo GA4 para leads gerados por formulário.
     if (typeof window !== "undefined") {
       const gtag = (
         window as typeof window & {
@@ -69,16 +68,24 @@ export default function LeadForm() {
         }
       ).gtag;
 
-      gtag?.("event", "generate_lead", {
-        currency: "BRL",
-        value: 497,
-        lead_source: "site",
-      });
+      if (typeof gtag === "function") {
+        console.log("[GA4] Lead enviado");
 
-      gtag?.("event", "lead_form_submit", {
-        event_category: "lead",
-        event_label: "Formulário de orçamento",
-      });
+        gtag("event", "generate_lead", {
+          currency: "BRL",
+          value: 497,
+          lead_source: "site",
+          transport_type: "beacon",
+        });
+
+        gtag("event", "lead_form_submit", {
+          event_category: "lead",
+          event_label: "Formulário de orçamento",
+          transport_type: "beacon",
+        });
+      } else {
+        console.warn("[GA4] gtag não está disponível no envio do formulário.");
+      }
     }
 
     const dominio =
