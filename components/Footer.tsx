@@ -49,7 +49,7 @@ export default function Footer() {
                 </a>
 
                 <a
-                  href="#projetos"
+                  href="#portfolio"
                   className="inline-flex items-center justify-center rounded-full border border-white/10 px-7 py-4 font-semibold text-white/70 transition hover:border-white/20 hover:bg-white/[0.03] hover:text-white"
                 >
                   Ver projetos
@@ -111,7 +111,7 @@ export default function Footer() {
           </nav>
 
          <a
-  href="https://instagram.com/"
+  href="https://www.instagram.com/dev.jacobxz/"
   target="_blank"
   rel="noopener noreferrer"
   className="flex h-10 items-center justify-center rounded-full border border-white/10 px-4 text-sm text-white/50 transition hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-500"
