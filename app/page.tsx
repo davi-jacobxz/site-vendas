@@ -60,7 +60,7 @@ export default function Home() {
               </a>
             </div>
             <div className="mt-8 grid gap-3 text-sm text-white/55 sm:grid-cols-3">
-              {["Entrega em [PREENCHER] dias", "Publicação inclusa", "Feito para celular"].map((item) => (
+              {["Site pronto em 1–2 dias*", "Publicação inclusa", "Feito para celular"].map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <Check size={16} className="shrink-0 text-[#F76303]" />
                   {item}
@@ -198,12 +198,13 @@ export default function Home() {
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">Quatro etapas, sem complicação.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
-              ["01", "Simulação", "Você responde as perguntas do projeto.", "[PREENCHER prazo]"],
-              ["02", "Proposta", "Analisamos as respostas e alinhamos o escopo.", "[PREENCHER prazo]"],
-              ["03", "Desenvolvimento", "Criamos, revisamos e ajustamos o site.", "[PREENCHER prazo]"],
-              ["04", "Publicação", "Colocamos o projeto no ar.", "[PREENCHER prazo]"],
+              ["01", "Simulação", "Você responde as perguntas do projeto.", "No mesmo dia"],
+              ["02", "Proposta", "Analisamos as respostas e alinhamos o escopo.", "No mesmo dia"],
+              ["03", "Desenvolvimento", "Criamos, revisamos e ajustamos o site.", "Em 1–2 dias"],
+              ["04", "Publicação", "Colocamos o projeto no ar.", "No mesmo dia"],
             ].map(([n, title, text, time]) => <div key={n} className="rounded-3xl border border-white/10 bg-white/[.025] p-7"><span className="text-sm font-black text-[#F76303]">{n}</span><h3 className="mt-6 text-xl font-black">{title}</h3><p className="mt-3 leading-7 text-white/45">{text}</p><p className="mt-5 text-xs font-bold uppercase tracking-[.15em] text-white/30">{time}</p></div>)}
           </div>
+          <p className="mt-6 text-xs text-white/30">* Prazo de 1–2 dias para projetos dentro do escopo combinado. Projetos maiores ou com integrações podem exigir mais tempo.</p>
         </div>
       </section>
 
