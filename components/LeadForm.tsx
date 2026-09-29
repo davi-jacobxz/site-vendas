@@ -59,37 +59,16 @@ export default function LeadForm() {
       return;
     }
 
-    // GA4: envia o lead usando gtag.js oficial.
-    // debug_mode permite conferir o evento no DebugView.
-    if (typeof window !== "undefined") {
-      const win = window as typeof window & {
-        gtag?: (
-          command: string,
-          eventName: string,
-          params?: Record<string, unknown>
-        ) => void;
-      };
-
-      if (typeof win.gtag === "function") {
-        console.log("[GA4] Enviando generate_lead");
-
-        win.gtag("event", "generate_lead", {
-          currency: "BRL",
-          value: 497,
-          lead_source: "site",
-          debug_mode: true,
-        });
-
-        // Evento auxiliar para facilitar a validação do envio do formulário.
-        win.gtag("event", "lead_generated", {
-          currency: "BRL",
-          value: 497,
-          lead_source: "site",
-          debug_mode: true,
-        });
-      } else {
-        console.warn("[GA4] gtag ainda não está disponível.");
-      }
+    // Evento de lead no Google Analytics
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (
+        window as typeof window & {
+          gtag?: (...args: unknown[]) => void;
+        }
+      ).gtag?.("event", "lead_form_submit", {
+        event_category: "lead",
+        event_label: "Formulário de orçamento",
+      });
     }
 
     const dominio =
@@ -148,10 +127,7 @@ Gostaria de receber uma proposta.`;
       });
     }
 
-    // Dá um pequeno intervalo para o GA4 enviar o evento antes de abrir o WhatsApp.
-    window.setTimeout(() => {
-      window.open(url, "_blank");
-    }, 300);
+    window.open(url, "_blank");
   }
 
   return (
