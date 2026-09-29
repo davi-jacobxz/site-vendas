@@ -108,6 +108,28 @@ Gostaria de receber uma proposta.`;
       mensagem
     )}`;
 
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (
+        window as typeof window & {
+          gtag?: (...args: unknown[]) => void;
+        }
+      ).gtag?.("event", "lead_form_submit", {
+        event_category: "lead",
+        event_label: "Formulário de orçamento",
+      });
+    }
+
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (
+        window as typeof window & {
+          gtag?: (...args: unknown[]) => void;
+        }
+      ).gtag?.("event", "whatsapp_click", {
+        event_category: "lead",
+        event_label: "WhatsApp - Formulário",
+      });
+    }
+
     window.open(url, "_blank");
   }
 
