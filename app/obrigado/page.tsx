@@ -12,7 +12,11 @@ function track(name:string,params:Record<string,unknown>={}) {
 }
 
 function estimate(website:string){
-  return website==="Landing page" ? "A partir de R$497" : "[PREENCHER faixa de preço]";
+  if (website==="Landing page") return "A partir de R$497";
+  if (website==="Página profissional") return "A partir de R$697";
+  if (website==="Site completo") return "A partir de R$897";
+  if (website==="Catálogo / Loja") return "A partir de R$1.497";
+  return "A partir de R$497";
 }
 
 export default function Obrigado(){
@@ -26,9 +30,9 @@ export default function Obrigado(){
    track("Lead",{lead_source:"simulador",page:"obrigado"});
  },[]);
 
- const business=answers?.business==="Outro"?answers.otherBusiness||"Outro":answers?.business||"[PREENCHER]";
- const website=answers?.website||"[PREENCHER]";
- const deadline=answers?.deadline||"[PREENCHER]";
+ const business=answers?.business==="Outro"?answers.otherBusiness||"Outro":answers?.business||"seu negócio";
+ const website=answers?.website||"site profissional";
+ const deadline=answers?.deadline||"a combinar";
  const name=answers?.name||"";
  const message="Olá! Sou "+name+". Quero falar sobre um site para meu negócio. Negócio: "+business+". Site: "+website+". Prazo: "+deadline+".";
  const whats="https://wa.me/5516992445413?text="+encodeURIComponent(message);
@@ -42,7 +46,7 @@ export default function Obrigado(){
     <p className="mx-auto mt-5 max-w-xl leading-7 text-white/50">Sua estimativa inicial é:</p>
     <div className="mt-6 rounded-3xl border border-[#F76303]/20 bg-[#F76303]/[.06] p-7">
       <p className="text-3xl font-black text-[#F76303]">{estimate(website)}</p>
-      <p className="mt-2 text-sm leading-6 text-white/40">O valor final depende do escopo aprovado. Faixas dos demais projetos: [PREENCHER].</p>
+      <p className="mt-2 text-sm leading-6 text-white/40">O valor final depende do escopo aprovado. Landing Page: R$497 · Página Profissional: R$697 · Site Completo: R$897 · Catálogo / Loja: a partir de R$1.497.</p>
     </div>
     <a href={whats} target="_blank" rel="noopener noreferrer" onClick={()=>track("contact",{location:"obrigado"})} className="mt-7 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-6 py-4 font-black text-white sm:w-auto">
       <MessageCircle size={19}/>Continuar no WhatsApp<ArrowRight size={18}/>
