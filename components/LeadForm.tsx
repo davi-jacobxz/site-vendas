@@ -80,9 +80,11 @@ export default function LeadForm() {
           debug_mode: true,
         });
 
-        win.gtag("event", "lead_form_submit", {
-          event_category: "lead",
-          event_label: "Formulário de orçamento",
+        // Evento auxiliar para facilitar a validação do envio do formulário.
+        win.gtag("event", "lead_generated", {
+          currency: "BRL",
+          value: 497,
+          lead_source: "site",
           debug_mode: true,
         });
       } else {
