@@ -59,36 +59,38 @@ export default function LeadForm() {
       return;
     }
 
-    // Rastreamento do envio do formulário.
-    // Se o gtag ainda não carregou, colocamos os eventos na fila do GA4.
+    // GA4: registra o lead diretamente na fila do Google Tag.
+    // Usamos dataLayer + debug_mode para garantir que o evento seja
+    // enviado mesmo se o gtag ainda estiver carregando.
     if (typeof window !== "undefined") {
       const win = window as typeof window & {
         dataLayer?: unknown[];
-        gtag?: (...args: unknown[]) => void;
       };
 
       win.dataLayer = win.dataLayer || [];
 
-      const gtag =
-        win.gtag ||
-        ((...args: unknown[]) => {
-          win.dataLayer?.push(args);
-        });
+      console.log("[GA4] Enviando generate_lead");
 
-      console.log("[GA4] Lead enviado");
+      win.dataLayer.push([
+        "event",
+        "generate_lead",
+        {
+          currency: "BRL",
+          value: 497,
+          lead_source: "site",
+          debug_mode: true,
+        },
+      ]);
 
-      gtag("event", "generate_lead", {
-        currency: "BRL",
-        value: 497,
-        lead_source: "site",
-        transport_type: "beacon",
-      });
-
-      gtag("event", "lead_form_submit", {
-        event_category: "lead",
-        event_label: "Formulário de orçamento",
-        transport_type: "beacon",
-      });
+      win.dataLayer.push([
+        "event",
+        "lead_form_submit",
+        {
+          event_category: "lead",
+          event_label: "Formulário de orçamento",
+          debug_mode: true,
+        },
+      ]);
     }
 
     const dominio =
@@ -147,7 +149,10 @@ Gostaria de receber uma proposta.`;
       });
     }
 
-    window.open(url, "_blank");
+    // Dá um pequeno intervalo para o GA4 enviar o evento antes de abrir o WhatsApp.
+    window.setTimeout(() => {
+      window.open(url, "_blank");
+    }, 300);
   }
 
   return (
