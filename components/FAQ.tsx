@@ -183,10 +183,10 @@ export default function FAQ() {
             </div>
 
             <a
-              href="#contato"
+              href="#orcamento"
               className="inline-flex shrink-0 items-center justify-center rounded-full bg-orange-500 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-400"
             >
-              Falar sobre meu projeto
+              Simular meu projeto
             </a>
           </div>
         </motion.div>
