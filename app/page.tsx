@@ -147,8 +147,8 @@ export default function Home() {
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
               ["Escopo combinado", "Antes de começar, definimos o que será entregue para evitar surpresa."],
-              ["Ajustes inclusos", "A quantidade exata de alterações precisa seguir o escopo contratado: [PREENCHER]."],
-              ["Suporte", "Condições e período de suporte após a publicação: [PREENCHER]."],
+              ["Ajustes inclusos", "Cada projeto inclui até 2 rodadas de ajustes dentro do escopo combinado. Alterações ou funcionalidades novas, fora do escopo aprovado, são orçadas separadamente."],
+              ["Suporte", "Após a publicação, há 7 dias de suporte para correções relacionadas ao que foi entregue. Novas páginas, funcionalidades ou alterações de escopo são orçadas separadamente."],
             ].map(([title, text]) => <div key={title} className="rounded-3xl border border-white/10 bg-white/[.025] p-7"><h3 className="text-xl font-black">{title}</h3><p className="mt-3 leading-7 text-white/45">{text}</p></div>)}
           </div>
         </div>
@@ -158,12 +158,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <span className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Pacotes</span>
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">Escolha o nível de projeto que faz sentido.</h2>
-          <p className="mt-4 max-w-2xl text-white/45">O valor de entrada conhecido hoje é R$497. Onde não houver preço ou condição comercial definida, deixei [PREENCHER].</p>
+          <p className="mt-4 max-w-2xl text-white/45">Os valores abaixo são preços de entrada. O preço final é confirmado depois de entender o escopo, conteúdo e funcionalidades do projeto.</p>
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {[
-              ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "Domínio e hospedagem pagos à parte; funcionalidades fora do escopo combinado."],
-              ["Página Profissional", "A partir de R$697", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "Domínio e hospedagem pagos à parte; textos, fotos e funcionalidades fora do escopo combinado."],
-              ["Site Completo", "A partir de R$897", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "Domínio e hospedagem pagos à parte; sistemas complexos, integrações especiais e conteúdo produzido do zero não inclusos no valor inicial."],
+              ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; novas funcionalidades ou alterações fora do escopo também são orçadas separadamente."],
+              ["Página Profissional", "A partir de R$697", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; textos e fotos devem ser fornecidos pelo cliente, e funcionalidades fora do escopo são orçadas separadamente."],
+              ["Site Completo", "A partir de R$897", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; sistemas complexos, integrações especiais e produção completa de conteúdo não fazem parte do valor inicial."],
             ].map(([name, price, deadline, items, excluded]) => (
               <div key={String(name)} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
                 <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">{name}</p>
