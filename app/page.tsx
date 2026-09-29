@@ -180,7 +180,7 @@ export default function Home() {
               ["Página Profissional", "[PREENCHER preço]", ["Estrutura para negócio", "Seções personalizadas", "WhatsApp", "SEO básico", "Publicação"], "[PREENCHER: o que não está incluso]"],
               ["Site Completo", "[PREENCHER preço]", ["Mais páginas e funcionalidades", "Estrutura personalizada", "Integrações conforme necessidade", "SEO básico", "Publicação"], "[PREENCHER: o que não está incluso]"],
             ].map(([name, price, items, excluded]) => (
-              <div key={name} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
+              <div key={String(name)} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
                 <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">{name}</p>
                 <p className="mt-4 text-3xl font-black">{price}</p>
                 <div className="mt-7 space-y-3">{(items as string[]).map((item) => <div key={item} className="flex gap-2 text-sm text-white/65"><Check size={17} className="mt-0.5 shrink-0 text-[#F76303]" />{item}</div>)}</div>
