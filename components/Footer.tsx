@@ -1,10 +1,27 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
-
 export default function Footer(){
  return <footer className="border-t border-white/10 bg-black">
-  <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12"><div className="rounded-[2rem] border border-[#F76303]/20 bg-[#0c0c0c] p-8 sm:p-12"><p className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Próximo passo</p><div className="mt-4 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"><div><h2 className="max-w-3xl text-4xl font-black sm:text-5xl">Seu site começa com uma conversa.</h2><p className="mt-4 max-w-2xl text-white/45">Simule seu projeto, veja a estimativa inicial e decida se quer continuar.</p></div><a href="#orcamento" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#F76303] px-7 py-4 font-black transition hover:bg-[#ff741c]">Simular meu site <ArrowUpRight size={18}/></a></div></div></section>
-  <div className="border-t border-white/10"><div className="mx-auto flex max-w-7xl flex-col gap-7 px-5 py-9 sm:px-8 lg:px-12"><div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between"><div><div className="text-2xl font-black">JACOB<span className="text-[#F76303]">.</span></div><p className="mt-2 text-sm text-white/35">Websites & Digital para pequenos negócios.</p></div><a href="https://www.instagram.com/dev.jacobxz/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-white/55 hover:text-[#F76303]"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>@dev.jacobxz</a></div><div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/25 sm:flex-row sm:items-center sm:justify-between"><div><p>Ribeirão Preto — SP, Brasil</p><p className="mt-1">CNPJ/MEI: <span className="text-white/40">[PREENCHER]</span></p></div><div className="flex gap-5"><a href="/privacidade" className="hover:text-white">Privacidade</a><a href="/termos" className="hover:text-white">Termos</a></div></div><p className="text-xs text-white/20">© {new Date().getFullYear()} JACOB. Websites & Digital.</p></div></div>
+  <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-12">
+   <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+     <div className="text-2xl font-black">JACOB<span className="text-[#F76303]">.</span></div>
+     <p className="mt-2 text-sm text-white/35">Websites & Digital para pequenos negócios.</p>
+    </div>
+    <a href="https://www.instagram.com/dev.jacobxz/" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white/55 hover:text-[#F76303]">@dev.jacobxz</a>
+   </div>
+   <div className="mt-8 grid gap-4 border-t border-white/10 pt-6 text-xs text-white/30 sm:grid-cols-2">
+    <div>
+     <p>Ribeirão Preto — SP, Brasil</p>
+     <p className="mt-2">CNPJ/MEI: <span className="text-white/50">[PREENCHER]</span></p>
+     <p className="mt-2">E-mail: <span className="text-white/50">[PREENCHER]</span></p>
+    </div>
+    <div className="flex gap-5 sm:justify-end">
+     <a href="/privacidade" className="hover:text-white">Política de Privacidade</a>
+     <a href="/termos" className="hover:text-white">Termos</a>
+    </div>
+   </div>
+   <p className="mt-7 text-xs text-white/20">© {new Date().getFullYear()} JACOB. Websites & Digital.</p>
+  </div>
  </footer>;
 }
