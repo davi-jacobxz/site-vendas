@@ -44,7 +44,7 @@ export default function Home() {
           </div>
 
           <a
-            href="#orcamento"
+          id="contato"
             className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-orange-500 hover:text-white"
           >
             Solicitar orçamento
@@ -112,7 +112,7 @@ export default function Home() {
             {/* BOTÕES */}
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a
-                href="#orcamento"
+                id="contato"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-400"
               >
                 Criar meu site
