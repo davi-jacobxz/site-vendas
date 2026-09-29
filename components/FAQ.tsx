@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const questions=[
- {question:"Quanto custa um site?",answer:"O valor público de entrada é a partir de R$497 para uma Landing Page. Valores de Página Profissional, Site Completo e Catálogo/Loja precisam ser definidos conforme o escopo real: [PREENCHER]."},
- {question:"O que está incluso?",answer:"O escopo pode incluir estrutura visual, desenvolvimento responsivo, integração com WhatsApp, configurações básicas de SEO e publicação. O que exatamente entra em cada pacote deve seguir a proposta aprovada: [PREENCHER]."},
- {question:"Domínio e hospedagem estão inclusos?",answer:"Domínio e hospedagem podem ter custos recorrentes. Quem registra/paga esses serviços, quais provedores serão usados e os custos anuais precisam ser definidos: [PREENCHER]."},
- {question:"Quanto tempo demora?",answer:"O prazo varia conforme o projeto e o envio dos materiais. Os prazos estimados por etapa precisam ser definidos: [PREENCHER]."},
- {question:"Quantas alterações posso pedir?",answer:"A quantidade de rodadas de ajustes deve ser definida no escopo de cada pacote: [PREENCHER]."},
- {question:"Como funciona o pagamento?",answer:"A forma e o momento do pagamento precisam ser definidos na proposta comercial: [PREENCHER]."},
- {question:"O que preciso enviar?",answer:"Normalmente são úteis logo, textos, fotos, informações dos serviços, contatos, endereço, redes sociais e referências visuais. O checklist final do projeto deve ser definido: [PREENCHER]."},
- {question:"Você dá suporte depois da publicação?",answer:"As condições, período e limites do suporte pós-publicação precisam ser definidos: [PREENCHER]."},
+ {question:"Quanto custa um site?",answer:"A Landing Page começa em R$497. Para Página Profissional, Site Completo e Catálogo / Loja, o valor depende do escopo e ainda precisa ser definido: [PREENCHER]. A simulação mostra apenas uma estimativa inicial."},
+ {question:"O que está incluso?",answer:"Cada pacote pode incluir estrutura visual, desenvolvimento responsivo, integração com WhatsApp, configurações básicas de SEO e publicação. O que entra e o que não entra em cada pacote precisa seguir a proposta comercial: [PREENCHER]."},
+ {question:"Domínio e hospedagem estão inclusos?",answer:"Esses serviços podem gerar custos recorrentes. Quem registra e paga o domínio, quem paga a hospedagem, quais provedores serão usados e os valores precisam ser definidos: [PREENCHER]."},
+ {question:"Qual é o prazo?",answer:"Para projetos dentro do escopo combinado, a referência atual informada para desenvolvimento é de 1–2 dias. Projetos maiores ou com integrações podem exigir mais tempo. Prazo final por pacote: [PREENCHER]."},
+ {question:"Quantas alterações posso pedir?",answer:"A quantidade de rodadas de alterações incluídas precisa ser definida por pacote: [PREENCHER]. Alterações fora do escopo podem ter cobrança adicional, conforme a proposta: [PREENCHER]."},
+ {question:"Como funciona o pagamento?",answer:"A forma, percentual de entrada, parcelas e momento do pagamento precisam ser definidos na proposta comercial: [PREENCHER]."},
+ {question:"O que preciso enviar?",answer:"Você normalmente precisará enviar logo, fotos, textos, serviços/produtos, contatos, endereço, redes sociais e referências que queira usar. O checklist final do projeto precisa ser definido: [PREENCHER]."},
+ {question:"Existe suporte depois da publicação?",answer:"Condições, período, canais e limites do suporte pós-publicação precisam ser definidos: [PREENCHER]."},
 ];
 
 export default function FAQ(){
