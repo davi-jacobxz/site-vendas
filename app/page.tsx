@@ -19,6 +19,19 @@ export default function Home() {
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
+  const handleWhatsAppClick = () => {
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (
+        window as typeof window & {
+          gtag?: (...args: unknown[]) => void;
+        }
+      ).gtag?.("event", "whatsapp_click", {
+        event_category: "lead",
+        event_label: "WhatsApp",
+      });
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
       {/* NAVBAR */}
@@ -57,6 +70,7 @@ export default function Home() {
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={handleWhatsAppClick}
               className="inline-flex items-center gap-2 rounded-full bg-[#F76303] px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-[#ff6f18]"
             >
               <MessageCircle size={16} />
