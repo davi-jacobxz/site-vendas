@@ -28,7 +28,8 @@ const packages=[
 
 export default function Home(){
  const whatsapp=wa("Olá! Vim pelo site da JACOB. Quero falar sobre um site para o meu negócio.");
- return <main className="min-h-screen overflow-x-hidden bg-[#050505] text-white">
+ const schema={"@context":"https://schema.org","@type":"ProfessionalService","name":"JACOB. Websites & Digital","url":"https://jacob-dev-sites.vercel.app","areaServed":"BR","address":{"@type":"PostalAddress","addressLocality":"Ribeirão Preto","addressRegion":"SP","addressCountry":"BR"}};
+ return <main className="min-h-screen overflow-x-hidden bg-[#050505] text-white"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}} />
   <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#050505]/85 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8"><a href="#inicio" className="text-xl font-black tracking-[-.04em]">JACOB<span className="text-[#F76303]">.</span></a><a href="#orcamento" onClick={()=>track("simulador_cta_click")} className="rounded-full bg-[#F76303] px-5 py-2.5 text-sm font-bold transition hover:scale-105">Simular meu site</a></div></header>
 
   <section id="inicio" className="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 sm:px-8"><div className="pointer-events-none absolute left-1/2 top-0 h-[650px] w-[650px] -translate-x-1/2 rounded-full bg-[#F76303]/10 blur-[150px]"/><div className="relative mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
