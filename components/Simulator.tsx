@@ -1,502 +1,60 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Globe,
-  MessageCircle,
-  Store,
-  Sparkles,
-} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, ArrowRight, Check, Loader2, MessageCircle, ShieldCheck } from "lucide-react";
 
-const businessTypes = [
-  "Restaurante",
-  "Salão / Beleza",
-  "Clínica",
-  "Loja",
-  "Profissional autônomo",
-  "Outro",
-];
+const businesses=["Restaurante","Salão / Beleza","Clínica","Loja","Profissional autônomo","Outro"];
+const websites=["Landing page","Página profissional","Site completo","Catálogo / Loja"];
+const currents=["Não tenho site","Tenho, mas quero refazer","Só tenho Instagram"];
+const deadlines=["Agora","Nos próximos 30 dias","Só pesquisando"];
+const budgets=["R$500 a R$1.000","R$1.000 a R$2.000","Acima de R$2.000","Prefiro conversar antes"];
+const empty={business:"",website:"",current:"",deadline:"",budget:"",name:"",whatsapp:"",email:"",notes:"",otherBusiness:""};
+type Answers=typeof empty;
 
-const websiteTypes = [
-  "Landing page",
-  "Página profissional",
-  "Site completo",
-  "Catálogo de produtos/serviços",
-];
+const track=(name:string,params:Record<string,unknown>={})=>{if(typeof window==="undefined")return;(window as typeof window & {gtag?:Function}).gtag?.("event",name,params)};
+const digits=(v:string)=>v.replace(/\D/g,"").slice(0,11);
+const mask=(v:string)=>{const n=digits(v);if(n.length<=2)return n?"("+n:"";if(n.length<=7)return "("+n.slice(0,2)+") "+n.slice(2);return "("+n.slice(0,2)+") "+n.slice(2,7)+"-"+n.slice(7)};
 
-export default function Simulator() {
-  const [step, setStep] = useState(1);
-
-  const [answers, setAnswers] = useState({
-    business: "",
-    website: "",
-    domain: "",
-    whatsapp: "",
-  });
-
-  const totalSteps = 4;
-
-  const updateAnswer = (key: string, value: string) => {
-    setAnswers((current) => ({
-      ...current,
-      [key]: value,
-    }));
-  };
-
-  const nextStep = () => {
-    if (step < totalSteps) {
-      setStep((current) => current + 1);
-    } else {
-      setStep(5);
-    }
-  };
-
-  const previousStep = () => {
-    if (step > 1) {
-      setStep((current) => current - 1);
-    }
-  };
-
-  const canContinue = () => {
-    if (step === 1) return answers.business !== "";
-    if (step === 2) return answers.website !== "";
-    if (step === 3) return answers.domain !== "";
-    if (step === 4) return answers.whatsapp !== "";
-
-    return true;
-  };
-
-  const progress = (step / totalSteps) * 100;
-
-  return (
-    <section
-      id="orcamento"
-      className="border-t border-white/5 bg-[#0b0b0b] px-6 py-28 lg:px-8"
-    >
-      <div className="mx-auto max-w-5xl">
-        {/* CABEÇALHO */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span className="inline-flex items-center rounded-full border border-orange-500/20 bg-orange-500/[0.08] px-4 py-2 text-sm font-medium uppercase tracking-[0.15em] text-orange-500">
-            Simulador de projeto
-          </span>
-
-          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
-            Descubra como pode ser o seu{" "}
-            <span className="text-orange-500">site.</span>
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/50">
-            Responda algumas perguntas rápidas para receber uma estimativa
-            inicial do seu projeto.
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/35">
-            <span className="flex items-center gap-2">
-              <Check size={15} className="text-orange-500" />
-              Rápido
-            </span>
-
-            <span className="flex items-center gap-2">
-              <Check size={15} className="text-orange-500" />
-              Sem compromisso
-            </span>
-
-            <span className="flex items-center gap-2">
-              <Check size={15} className="text-orange-500" />
-              A partir de R$497
-            </span>
-          </div>
-        </motion.div>
-
-        {/* CARD */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-14 max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#101010] shadow-2xl shadow-black/20"
-        >
-          {/* PROGRESSO */}
-          {step <= totalSteps && (
-            <div className="border-b border-white/10 px-6 py-5 sm:px-10">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-white/70">
-                    Etapa {step} de {totalSteps}
-                  </p>
-
-                  <p className="mt-1 text-xs text-white/30">
-                    Leva menos de 1 minuto
-                  </p>
-                </div>
-
-                <span className="text-sm font-semibold text-orange-500">
-                  {Math.round(progress)}%
-                </span>
-              </div>
-
-              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/5">
-                <motion.div
-                  className="h-full rounded-full bg-orange-500"
-                  animate={{
-                    width: `${progress}%`,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    ease: "easeOut",
-                  }}
-                />
-              </div>
-            </div>
-          )}
-
-          <div className="p-6 sm:p-10">
-            <AnimatePresence mode="wait">
-              {/* ETAPA 1 */}
-              {step === 1 && (
-                <motion.div
-                  key="step1"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <QuestionHeader
-                    icon={<Store size={22} />}
-                    title="Qual é o seu tipo de negócio?"
-                    description="Escolha a opção que mais combina com sua empresa."
-                  />
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {businessTypes.map((type) => (
-                      <Option
-                        key={type}
-                        label={type}
-                        selected={answers.business === type}
-                        onClick={() =>
-                          updateAnswer("business", type)
-                        }
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* ETAPA 2 */}
-              {step === 2 && (
-                <motion.div
-                  key="step2"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <QuestionHeader
-                    icon={<Sparkles size={22} />}
-                    title="Que tipo de site você precisa?"
-                    description="Escolha a estrutura mais próxima do que você imagina."
-                  />
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {websiteTypes.map((type) => (
-                      <Option
-                        key={type}
-                        label={type}
-                        selected={answers.website === type}
-                        onClick={() =>
-                          updateAnswer("website", type)
-                        }
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* ETAPA 3 */}
-              {step === 3 && (
-                <motion.div
-                  key="step3"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <QuestionHeader
-                    icon={<Globe size={22} />}
-                    title="Você já possui um domínio?"
-                    description="Por exemplo: seunegocio.com.br"
-                  />
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <Option
-                      label="Sim, já tenho"
-                      selected={
-                        answers.domain === "Sim, já tenho"
-                      }
-                      onClick={() =>
-                        updateAnswer(
-                          "domain",
-                          "Sim, já tenho"
-                        )
-                      }
-                    />
-
-                    <Option
-                      label="Não tenho ainda"
-                      selected={
-                        answers.domain ===
-                        "Não tenho ainda"
-                      }
-                      onClick={() =>
-                        updateAnswer(
-                          "domain",
-                          "Não tenho ainda"
-                        )
-                      }
-                    />
-                  </div>
-                </motion.div>
-              )}
-
-              {/* ETAPA 4 */}
-              {step === 4 && (
-                <motion.div
-                  key="step4"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <QuestionHeader
-                    icon={<MessageCircle size={22} />}
-                    title="Precisa de integração com WhatsApp?"
-                    description="Facilite o contato dos seus clientes diretamente pelo site."
-                  />
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <Option
-                      label="Sim"
-                      selected={answers.whatsapp === "Sim"}
-                      onClick={() =>
-                        updateAnswer("whatsapp", "Sim")
-                      }
-                    />
-
-                    <Option
-                      label="Não"
-                      selected={answers.whatsapp === "Não"}
-                      onClick={() =>
-                        updateAnswer("whatsapp", "Não")
-                      }
-                    />
-                  </div>
-                </motion.div>
-              )}
-
-              {/* RESULTADO */}
-              {step === 5 && (
-                <motion.div
-                  key="result"
-                  initial={{ opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-center"
-                >
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/10 text-orange-500">
-                    <Check size={28} />
-                  </div>
-
-                  <p className="mt-7 text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
-                    Estimativa inicial
-                  </p>
-
-                  <h3 className="mt-4 text-5xl font-semibold tracking-tight sm:text-6xl">
-                    A partir de R$497
-                  </h3>
-
-                  <p className="mx-auto mt-5 max-w-lg leading-7 text-white/50">
-                    O valor final depende da estrutura,
-                    funcionalidades e necessidades específicas
-                    do seu negócio.
-                  </p>
-
-                  {/* RESUMO */}
-                  <div className="mx-auto mt-8 max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-[0.15em] text-white/30">
-                      Seu projeto
-                    </p>
-
-                    <Summary
-                      label="Negócio"
-                      value={answers.business}
-                    />
-
-                    <Summary
-                      label="Tipo de site"
-                      value={answers.website}
-                    />
-
-                    <Summary
-                      label="Domínio"
-                      value={answers.domain}
-                    />
-
-                    <Summary
-                      label="WhatsApp"
-                      value={answers.whatsapp}
-                    />
-                  </div>
-
-                  {/* CTA */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sessionStorage.setItem(
-                        "orcamento",
-                        JSON.stringify(answers)
-                      );
-
-                      document
-                        .getElementById("contato")
-                        ?.scrollIntoView({
-                          behavior: "smooth",
-                        });
-                    }}
-                    className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-400 sm:w-auto"
-                  >
-                    Quero receber uma proposta
-                    <ArrowRight
-                      size={18}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </button>
-
-                  <p className="mt-4 text-xs text-white/25">
-                    Você poderá conversar diretamente pelo WhatsApp.
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* NAVEGAÇÃO */}
-            {step <= totalSteps && (
-              <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
-                <button
-                  type="button"
-                  onClick={previousStep}
-                  disabled={step === 1}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-white/40 transition hover:text-white disabled:pointer-events-none disabled:opacity-0"
-                >
-                  <ArrowLeft size={17} />
-                  Voltar
-                </button>
-
-                <button
-                  type="button"
-                  onClick={nextStep}
-                  disabled={!canContinue()}
-                  className="group inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-30"
-                >
-                  {step === totalSteps
-                    ? "Ver estimativa"
-                    : "Continuar"}
-
-                  <ArrowRight
-                    size={17}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </button>
-              </div>
-            )}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+function attribution(){
+ if(typeof window==="undefined")return {};
+ const p=new URLSearchParams(window.location.search),out:Record<string,string>={};
+ ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid","gclid"].forEach(k=>{const v=p.get(k)||sessionStorage.getItem("jacob_"+k);if(v){out[k]=v;sessionStorage.setItem("jacob_"+k,v)}});
+ out.landing_page=window.location.href;return out;
 }
 
-function QuestionHeader({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="mb-8">
-      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-        {icon}
-      </div>
+export default function Simulator(){
+ const [step,setStep]=useState(1),[answers,setAnswers]=useState<Answers>(empty),[loading,setLoading]=useState(false),[saved,setSaved]=useState(false),[error,setError]=useState(""),[honeypot,setHoneypot]=useState("");
+ const total=6;
+ useEffect(()=>{const old=sessionStorage.getItem("jacob_simulador");if(old)try{setAnswers({...empty,...JSON.parse(old)})}catch{};const el=document.getElementById("orcamento");if(!el)return;const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){track("view_content",{content_name:"simulador"});obs.disconnect()}},{threshold:.25});obs.observe(el);return()=>obs.disconnect()},[]);
+ useEffect(()=>{sessionStorage.setItem("jacob_simulador",JSON.stringify(answers))},[answers]);
+ const can=useMemo(()=>step===1?!!answers.business&&(answers.business!=="Outro"||!!answers.otherBusiness.trim()):step===2?!!answers.website:step===3?!!answers.current:step===4?!!answers.deadline:step===5?!!answers.budget:!!answers.name.trim()&&digits(answers.whatsapp).length===11,[answers,step]);
+ const update=(key:keyof Answers,value:string)=>setAnswers(a=>({...a,[key]:value}));
+ async function save(partial=false){
+  const score=answers.deadline==="Agora"&&["R$1.000 a R$2.000","Acima de R$2.000"].includes(answers.budget)?"alto":answers.deadline==="Nos próximos 30 dias"?"médio":"baixo";
+  const body={nome:answers.name.trim(),whatsapp:digits(answers.whatsapp),email:answers.email.trim()||null,negocio:answers.business==="Outro"?answers.otherBusiness.trim():answers.business,site:answers.website,orcamento:answers.budget,prazo:answers.deadline,observacoes:answers.notes.trim()||null,score,partial,consent_lgpd:true,consent_at:new Date().toISOString(),honeypot,...attribution()};
+  const res=await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}),data=await res.json();if(!res.ok)throw new Error(data.error||"Não foi possível salvar seus dados.");return data;
+ }
+ async function next(){if(!can)return;setError("");track("simulador_etapa_"+step,{step});if(step<6){setStep(s=>s+1);return}setLoading(true);try{await save(false);setSaved(true);track("generate_lead",{currency:"BRL",value:497});track("lead",{lead_source:"simulador"})}catch(e){setError(e instanceof Error?e.message:"Não foi possível enviar. Tente novamente.")}finally{setLoading(false)}}
+ async function partial(){if(answers.name.trim()&&digits(answers.whatsapp).length===11&&!saved)try{await save(true)}catch{}}
+ const msg="Olá! Sou "+answers.name+". Quero falar sobre um site para meu negócio. Negócio: "+(answers.business==="Outro"?answers.otherBusiness:answers.business)+". Site: "+answers.website+". Prazo: "+answers.deadline+".";
+ const whats="https://wa.me/5516992445413?text="+encodeURIComponent(msg);
 
-      <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-        {title}
-      </h3>
-
-      <p className="mt-2 text-white/40">{description}</p>
-    </div>
-  );
+ return <section id="orcamento" className="scroll-mt-16 border-y border-white/5 bg-[#070707] px-5 py-24 sm:px-8"><div className="mx-auto max-w-6xl"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+  <div className="lg:sticky lg:top-24"><p className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Simulador de projeto</p><h2 className="mt-4 text-4xl font-black tracking-[-.04em] sm:text-5xl">Descubra em 1 minuto quanto pode custar seu site.</h2><p className="mt-5 text-lg leading-8 text-white/45">Uma pergunta por vez. No final, você recebe uma estimativa inicial e decide se quer continuar no WhatsApp.</p><div className="mt-8 space-y-3 text-sm text-white/55"><div className="flex gap-3"><Check className="text-[#F76303]" size={18}/>Sem compromisso</div><div className="flex gap-3"><Check className="text-[#F76303]" size={18}/>Projetos a partir de R$497</div><div className="flex gap-3"><Check className="text-[#F76303]" size={18}/>Dados salvos antes do WhatsApp</div></div></div>
+  <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0d0d] shadow-2xl">{!saved&&<div className="border-b border-white/10 px-6 py-5"><div className="flex justify-between text-xs font-bold uppercase tracking-[.12em] text-white/35"><span>Etapa {step} de {total}</span><span className="text-[#F76303]">{Math.round(step/total*100)}%</span></div><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/5"><motion.div className="h-full bg-[#F76303]" animate={{width:(step/total*100)+"%"}}/></div></div>}
+   <div className="p-6 sm:p-10">{saved?<Success answers={answers} url={whats}/>:<><input aria-hidden tabIndex={-1} value={honeypot} onChange={e=>setHoneypot(e.target.value)} className="absolute -left-[9999px] h-0 w-0 opacity-0" autoComplete="off"/><AnimatePresence mode="wait"><motion.div key={step} initial={{opacity:0,x:18}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-18}}>
+    {step===1&&<Question title="Qual é o seu tipo de negócio?" sub="Isso ajuda a adaptar a estrutura do projeto."><Options values={businesses} selected={answers.business} onSelect={v=>update("business",v)}/>{answers.business==="Outro"&&<input value={answers.otherBusiness} onChange={e=>update("otherBusiness",e.target.value)} placeholder="Qual é o seu negócio?" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-5 py-4 outline-none focus:border-[#F76303]"/>}</Question>}
+    {step===2&&<Question title="O que você precisa?" sub="Escolha o formato mais próximo do que você imagina."><Options values={websites} selected={answers.website} onSelect={v=>update("website",v)}/></Question>}
+    {step===3&&<Question title="Como está hoje?" sub="Sem julgamento. Queremos entender seu ponto de partida."><Options values={currents} selected={answers.current} onSelect={v=>update("current",v)}/></Question>}
+    {step===4&&<Question title="Quando você quer começar?" sub="Isso ajuda a organizar o atendimento."><Options values={deadlines} selected={answers.deadline} onSelect={v=>update("deadline",v)}/></Question>}
+    {step===5&&<Question title="Quanto pretende investir?" sub="Não é compromisso. É só para entender o nível de projeto que faz sentido."><Options values={budgets} selected={answers.budget} onSelect={v=>update("budget",v)}/></Question>}
+    {step===6&&<Question title="Onde posso falar com você?" sub="WhatsApp é obrigatório. E-mail é opcional."><div className="space-y-4"><Field label="Nome *" value={answers.name} onChange={v=>update("name",v)} placeholder="Seu nome" onBlur={partial}/><Field label="WhatsApp *" value={answers.whatsapp} onChange={v=>update("whatsapp",mask(v))} placeholder="(16) 99999-9999" onBlur={partial}/><Field label="E-mail" value={answers.email} onChange={v=>update("email",v)} placeholder="voce@empresa.com"/><div><label className="mb-2 block text-sm font-semibold text-white/70">Conte rapidamente o que você precisa</label><textarea value={answers.notes} onChange={e=>update("notes",e.target.value)} rows={4} placeholder="Ex.: quero apresentar meus serviços e receber clientes pelo WhatsApp." className="w-full resize-none rounded-2xl border border-white/10 bg-black px-5 py-4 outline-none focus:border-[#F76303]"/></div><label className="flex gap-3 text-xs leading-5 text-white/40"><input type="checkbox" checked readOnly className="mt-1 accent-orange-500"/>Ao enviar, você concorda com o uso dos dados para contato sobre o projeto, conforme nossa <a href="/privacidade" target="_blank" className="text-white underline">Política de Privacidade</a>.</label></div></Question>}
+   </motion.div></AnimatePresence>{error&&<p className="mt-5 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-300">{error}</p>}<div className="mt-8 flex gap-3">{step>1&&<button type="button" onClick={()=>setStep(step-1)} className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 text-white/60"><ArrowLeft size={18}/></button>}<button type="button" disabled={!can||loading} onClick={next} className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-[#F76303] font-black disabled:opacity-40">{loading?<><Loader2 className="animate-spin" size={18}/>Salvando...</>:step===6?<>Receber estimativa <ArrowRight size={18}/></>:<>Continuar <ArrowRight size={18}/></>}</button></div><p className="mt-4 flex justify-center gap-2 text-center text-xs text-white/25"><ShieldCheck size={14}/>Seus dados ficam registrados antes do WhatsApp.</p></>}</div>
+  </div></div></div></section>;
 }
 
-function Option({
-  label,
-  selected,
-  onClick,
-}: {
-  label: string;
-  selected: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`group flex min-h-16 items-center justify-between rounded-2xl border p-4 text-left transition duration-200 ${
-        selected
-          ? "border-orange-500 bg-orange-500/10 text-white"
-          : "border-white/10 bg-white/[0.02] text-white/70 hover:border-white/20 hover:bg-white/[0.04]"
-      }`}
-    >
-      <span className="font-medium">{label}</span>
-
-      <span
-        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition ${
-          selected
-            ? "border-orange-500 bg-orange-500 text-white"
-            : "border-white/10 bg-white/[0.03] text-transparent group-hover:border-white/20"
-        }`}
-      >
-        <Check size={14} />
-      </span>
-    </button>
-  );
-}
-
-function Summary({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-center justify-between gap-4 border-b border-white/5 py-3 last:border-0">
-      <span className="text-sm text-white/40">{label}</span>
-
-      <span className="max-w-[60%] text-right text-sm font-medium">
-        {value}
-      </span>
-    </div>
-  );
-}
+function Question({title,sub,children}:{title:string;sub:string;children:React.ReactNode}){return <div><h3 className="text-2xl font-black sm:text-3xl">{title}</h3><p className="mt-2 text-sm text-white/40">{sub}</p><div className="mt-7">{children}</div></div>}
+function Options({values,selected,onSelect}:{values:string[];selected:string;onSelect:(v:string)=>void}){return <div className="grid gap-3 sm:grid-cols-2">{values.map(v=><button type="button" key={v} onClick={()=>onSelect(v)} className={"min-h-14 rounded-2xl border px-5 py-4 text-left text-sm font-semibold transition "+(selected===v?"border-[#F76303] bg-[#F76303]/10 text-white":"border-white/10 bg-black text-white/60 hover:border-white/25 hover:text-white")}>{v}</button>)}</div>}
+function Field({label,value,onChange,placeholder,onBlur}:{label:string;value:string;onChange:(v:string)=>void;placeholder:string;onBlur?:()=>void}){return <div><label className="mb-2 block text-sm font-semibold text-white/70">{label}</label><input value={value} onChange={e=>onChange(e.target.value)} onBlur={onBlur} placeholder={placeholder} className="w-full rounded-2xl border border-white/10 bg-black px-5 py-4 outline-none placeholder:text-white/20 focus:border-[#F76303]"/></div>}
+function Success({answers,url}:{answers:Answers;url:string}){return <div className="text-center"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F76303]/10 text-[#F76303]"><Check size={30}/></div><p className="mt-6 text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Simulação recebida</p><h3 className="mt-3 text-3xl font-black sm:text-4xl">Pronto, {answers.name.split(" ")[0]}.</h3><p className="mx-auto mt-4 max-w-xl leading-7 text-white/45">Seu projeto parte de <strong className="text-white">R$497</strong>. O valor final depende do escopo e das funcionalidades.</p><div className="mx-auto mt-7 max-w-md rounded-2xl border border-white/10 bg-black p-5 text-left text-sm"><div className="flex justify-between border-b border-white/5 pb-3"><span className="text-white/35">Negócio</span><strong>{answers.business==="Outro"?answers.otherBusiness:answers.business}</strong></div><div className="flex justify-between pt-3"><span className="text-white/35">Prazo</span><strong>{answers.deadline}</strong></div></div><a href={url} target="_blank" rel="noopener noreferrer" onClick={()=>track("contact",{method:"WhatsApp"})} className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#25D366] font-black"><MessageCircle size={19}/>Continuar no WhatsApp</a></div>}
