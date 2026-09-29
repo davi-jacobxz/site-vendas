@@ -84,18 +84,18 @@ export default function Simulator() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/5 px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
-            Faça seu orçamento
-          </span>
+         <span className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/5 px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
+  Orçamento
+</span>
 
-          <h2 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Descubra quanto pode custar o seu site.
-          </h2>
+<h2 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
+  Vamos criar seu site.
+</h2>
 
-          <p className="mt-5 text-lg leading-8 text-white/50">
-            Responda algumas perguntas rápidas e descubra o ponto de partida para o
-  seu projeto.
-          </p>
+<p className="mt-5 text-lg leading-8 text-white/50">
+  Responda 4 perguntas rápidas e veja uma estimativa inicial para o seu
+  projeto.
+</p>
 
           <div className="mt-6 flex items-center justify-center gap-2 text-sm text-white/40">
             <Check size={17} className="text-orange-500" />
@@ -114,12 +114,16 @@ export default function Simulator() {
                     Etapa {step} de {totalSteps}
                   </span>
 
-                  <p className="mt-1 text-white/35">
-                    {step === 1 && "Sobre seu negócio"}
-                    {step === 2 && "Sobre o seu site"}
-                    {step === 3 && "Domínio"}
-                    {step === 4 && "Integração"}
-                  </p>
+                 <span className="font-medium text-white">
+  Etapa {step} de {totalSteps}
+</span>
+
+<p className="mt-1 text-white/35">
+  {step === 1 && "Sobre seu negócio"}
+  {step === 2 && "Sobre o seu site"}
+  {step === 3 && "Domínio"}
+  {step === 4 && "Integração"}
+</p>
                 </div>
 
                 <span className="font-semibold text-orange-500">
