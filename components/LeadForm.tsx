@@ -59,13 +59,23 @@ export default function LeadForm() {
       return;
     }
 
-    // Evento de lead no Google Analytics
-    if (typeof window !== "undefined" && "gtag" in window) {
-      (
+    // Registra o lead no Google Analytics.
+    // Usamos dois nomes: "generate_lead" (evento recomendado pelo GA4)
+    // e "lead_form_submit" (evento específico do nosso formulário).
+    if (typeof window !== "undefined") {
+      const gtag = (
         window as typeof window & {
           gtag?: (...args: unknown[]) => void;
         }
-      ).gtag?.("event", "lead_form_submit", {
+      ).gtag;
+
+      gtag?.("event", "generate_lead", {
+        currency: "BRL",
+        value: 497,
+        lead_source: "site",
+      });
+
+      gtag?.("event", "lead_form_submit", {
         event_category: "lead",
         event_label: "Formulário de orçamento",
       });
