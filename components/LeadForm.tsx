@@ -32,11 +32,7 @@ function pegarDadosSimulador(): DadosSimulador | null {
 
     return JSON.parse(dados);
   } catch (error) {
-    console.error(
-      "Erro ao recuperar orçamento:",
-      error
-    );
-
+    console.error("Erro ao recuperar orçamento:", error);
     return null;
   }
 }
@@ -46,16 +42,6 @@ export default function LeadForm() {
 
   const [nome, setNome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-
-  const [negocio, setNegocio] = useState(
-    dadosSimulador?.negocio || ""
-  );
-
-  const [site, setSite] = useState(
-    dadosSimulador?.site || ""
-  );
-
-  const [orcamento, setOrcamento] = useState("");
   const [observacoes, setObservacoes] = useState("");
 
   const [enviando, setEnviando] = useState(false);
@@ -66,16 +52,17 @@ export default function LeadForm() {
   ) {
     event.preventDefault();
 
-    if (!nome || !whatsapp || !negocio || !site) {
-      alert("Preencha os campos obrigatórios.");
+    if (!nome || !whatsapp) {
+      alert("Preencha seu nome e WhatsApp.");
       return;
     }
 
     setEnviando(true);
     setSucesso(false);
 
+    const negocio = dadosSimulador?.negocio || "";
+    const site = dadosSimulador?.site || "";
     const dominio = dadosSimulador?.dominio || "";
-
     const integracaoWhatsapp =
       dadosSimulador?.whatsapp || "";
 
@@ -85,9 +72,9 @@ export default function LeadForm() {
         .insert({
           nome,
           whatsapp,
-          negocio,
-          site,
-          orcamento: orcamento || null,
+          negocio: negocio || "Não informado",
+          site: site || "Não informado",
+          orcamento: "A partir de R$497",
           observacoes: observacoes || null,
           dominio: dominio || null,
           integracao_whatsapp:
@@ -95,10 +82,7 @@ export default function LeadForm() {
         });
 
       if (error) {
-        console.error(
-          "Erro ao salvar lead:",
-          error
-        );
+        console.error("Erro ao salvar lead:", error);
 
         alert(
           "Não foi possível enviar seus dados agora. Tente novamente."
@@ -111,18 +95,21 @@ export default function LeadForm() {
       setSucesso(true);
 
       const mensagem = `
-Olá! Quero solicitar um orçamento para um site.
+Olá! Quero solicitar uma proposta para um site.
 
 *Nome:* ${nome}
 *WhatsApp:* ${whatsapp}
-*Negócio:* ${negocio}
-*Tipo de site:* ${site}
-*Orçamento:* ${orcamento || "Não informado"}
 
+*Resumo do projeto:*
+
+*Negócio:* ${negocio || "Não informado"}
+*Tipo de site:* ${site || "Não informado"}
 *Domínio:* ${dominio || "Não informado"}
 *WhatsApp no site:* ${
         integracaoWhatsapp || "Não informado"
       }
+
+*Investimento inicial:* A partir de R$497
 
 *Observações:*
 ${observacoes || "Nenhuma"}
@@ -138,10 +125,7 @@ Enviado através do site JACOB.
 
       window.location.href = url;
     } catch (error) {
-      console.error(
-        "Erro inesperado:",
-        error
-      );
+      console.error("Erro inesperado:", error);
 
       alert(
         "Ocorreu um erro ao enviar seus dados. Tente novamente."
@@ -161,7 +145,7 @@ Enviado através do site JACOB.
       <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-orange-500/[0.06] blur-[150px]" />
 
       <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        {/* LEFT */}
+        {/* ESQUERDA */}
 
         <motion.div
           initial={{
@@ -186,7 +170,7 @@ Enviado através do site JACOB.
           </div>
 
           <h2 className="max-w-xl text-4xl font-semibold leading-tight tracking-[-0.03em] sm:text-5xl">
-            Seu próximo site
+            Sua proposta
             <span className="text-orange-500">
               {" "}
               começa aqui.
@@ -194,29 +178,30 @@ Enviado através do site JACOB.
           </h2>
 
           <p className="mt-6 max-w-lg text-base leading-7 text-white/50">
-            Conte um pouco sobre o seu negócio e o
-            que você precisa. Salvamos seus dados e
-            depois abrimos o WhatsApp para
-            continuarmos a conversa.
+            Você já contou o que precisa no simulador.
+            Agora só precisamos dos seus dados para
+            entrar em contato.
           </p>
+
+          {/* ETAPAS */}
 
           <div className="mt-10 space-y-5">
             <InfoStep
               number="01"
-              title="Você envia seus dados"
-              description="Preencha o formulário com as informações do seu projeto."
+              title="Projeto definido"
+              description="Suas escolhas do simulador já foram preenchidas automaticamente."
             />
 
             <InfoStep
               number="02"
-              title="Nós analisamos"
-              description="Entendemos a estrutura que seu negócio precisa."
+              title="Você deixa seus dados"
+              description="Informe apenas seu nome e WhatsApp para recebermos sua solicitação."
             />
 
             <InfoStep
               number="03"
               title="Continuamos pelo WhatsApp"
-              description="Conversamos sobre o projeto e os próximos passos."
+              description="Depois do envio, o WhatsApp será aberto para continuarmos a conversa."
             />
           </div>
 
@@ -232,7 +217,7 @@ Enviado através do site JACOB.
           </div>
         </motion.div>
 
-        {/* FORM */}
+        {/* FORMULÁRIO */}
 
         <motion.div
           initial={{
@@ -254,19 +239,68 @@ Enviado através do site JACOB.
         >
           <div className="mb-8">
             <p className="text-sm font-medium text-orange-500">
-              Solicitar orçamento
+              Solicitar proposta
             </p>
 
             <h3 className="mt-2 text-2xl font-semibold">
-              Fale sobre o seu projeto
+              Confira seu projeto
             </h3>
 
             <p className="mt-2 text-sm leading-6 text-white/40">
-              Quanto mais informações você enviar,
-              melhor conseguiremos entender sua
-              necessidade.
+              Essas informações vieram do simulador e
+              não precisam ser preenchidas novamente.
             </p>
           </div>
+
+          {/* RESUMO */}
+
+          <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="mb-5 flex items-center justify-between">
+              <h4 className="font-semibold">
+                Resumo do projeto
+              </h4>
+
+              <span className="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-400">
+                A partir de R$497
+              </span>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <SummaryItem
+                label="Negócio"
+                value={
+                  dadosSimulador?.negocio ||
+                  "Não informado"
+                }
+              />
+
+              <SummaryItem
+                label="Tipo de site"
+                value={
+                  dadosSimulador?.site ||
+                  "Não informado"
+                }
+              />
+
+              <SummaryItem
+                label="Domínio"
+                value={
+                  dadosSimulador?.dominio ||
+                  "Não informado"
+                }
+              />
+
+              <SummaryItem
+                label="WhatsApp no site"
+                value={
+                  dadosSimulador?.whatsapp ||
+                  "Não informado"
+                }
+              />
+            </div>
+          </div>
+
+          {/* FORM */}
 
           <form
             onSubmit={enviarWhatsApp}
@@ -288,42 +322,17 @@ Enviado através do site JACOB.
               />
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field
-                label="Seu negócio *"
-                value={negocio}
-                onChange={setNegocio}
-                placeholder="Ex.: Barbearia"
-              />
-
-              <Field
-                label="Tipo de site *"
-                value={site}
-                onChange={setSite}
-                placeholder="Ex.: Site institucional"
-              />
-            </div>
-
-            <Field
-              label="Orçamento disponível"
-              value={orcamento}
-              onChange={setOrcamento}
-              placeholder="Ex.: A partir de R$497"
-            />
-
             <div>
               <label className="mb-2 block text-sm text-white/60">
-                Conte mais sobre o projeto
+                Alguma observação?
               </label>
 
               <textarea
                 value={observacoes}
                 onChange={(event) =>
-                  setObservacoes(
-                    event.target.value
-                  )
+                  setObservacoes(event.target.value)
                 }
-                placeholder="Ex.: Quero apresentar meus serviços, colocar botão do WhatsApp e uma galeria de fotos..."
+                placeholder="Ex.: Quero uma galeria de fotos, apresentar meus serviços e colocar um botão de orçamento..."
                 rows={5}
                 className="w-full resize-none rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/20 focus:border-orange-500/50 focus:bg-white/[0.05]"
               />
@@ -346,7 +355,7 @@ Enviado através do site JACOB.
                 "Salvando..."
               ) : (
                 <>
-                  Enviar e continuar no WhatsApp
+                  Quero receber uma proposta
 
                   <Send
                     size={17}
@@ -367,6 +376,8 @@ Enviado através do site JACOB.
     </section>
   );
 }
+
+/* FIELD */
 
 function Field({
   label,
@@ -397,6 +408,30 @@ function Field({
     </div>
   );
 }
+
+/* RESUMO */
+
+function SummaryItem({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div>
+      <p className="text-xs text-white/35">
+        {label}
+      </p>
+
+      <p className="mt-1 text-sm font-medium text-white/80">
+        {value}
+      </p>
+    </div>
+  );
+}
+
+/* ETAPA */
 
 function InfoStep({
   number,

@@ -16,10 +16,12 @@ export default function Home() {
       {/* NAVBAR */}
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.04] bg-[#080808]/70 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+          {/* LOGO */}
           <div className="text-xl font-bold tracking-tight">
             JACOB<span className="text-orange-500">.</span>
           </div>
 
+          {/* MENU */}
           <div className="hidden items-center gap-8 text-sm text-white/60 md:flex">
             <a
               href="#projetos"
@@ -43,8 +45,9 @@ export default function Home() {
             </a>
           </div>
 
+          {/* CTA NAVBAR */}
           <a
-          id="contato"
+            href="#orcamento"
             className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-orange-500 hover:text-white"
           >
             Solicitar orçamento
@@ -69,6 +72,7 @@ export default function Home() {
             {/* BADGE */}
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/[0.08] px-4 py-2 text-sm text-orange-300">
               <span className="h-2 w-2 animate-pulse rounded-full bg-orange-500" />
+
               Sites profissionais para pequenos negócios
             </div>
 
@@ -112,10 +116,11 @@ export default function Home() {
             {/* BOTÕES */}
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a
-                id="contato"
+                href="#orcamento"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-400"
               >
                 Criar meu site
+
                 <ArrowRight
                   size={18}
                   className="transition-transform group-hover:translate-x-1"
@@ -160,9 +165,20 @@ export default function Home() {
 
           {/* MOCKUP */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 35 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            initial={{
+              opacity: 0,
+              scale: 0.94,
+              y: 35,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+            }}
             className="relative"
           >
             <div className="relative mx-auto max-w-xl">
@@ -185,7 +201,7 @@ export default function Home() {
 
                   {/* SITE SIMULADO */}
                   <div className="relative overflow-hidden rounded-2xl bg-[#0c0c0c] p-6 sm:p-8">
-                    {/* brilho */}
+                    {/* BRILHO */}
                     <div className="pointer-events-none absolute right-[-80px] top-[-80px] h-56 w-56 rounded-full bg-orange-500/10 blur-3xl" />
 
                     {/* NAV */}
@@ -211,7 +227,9 @@ export default function Home() {
                     {/* CARDS */}
                     <div className="mt-12 grid grid-cols-3 gap-3">
                       <div className="h-20 rounded-xl border border-white/5 bg-white/[0.04]" />
+
                       <div className="h-20 rounded-xl border border-white/5 bg-white/[0.04]" />
+
                       <div className="h-20 rounded-xl border border-white/5 bg-white/[0.04]" />
                     </div>
                   </div>
@@ -220,7 +238,9 @@ export default function Home() {
 
               {/* CARD FLUTUANTE */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
+                animate={{
+                  y: [0, -8, 0],
+                }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
@@ -239,8 +259,14 @@ export default function Home() {
 
               {/* CARD PREÇO */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{
+                  opacity: 0,
+                  x: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                }}
                 transition={{
                   duration: 0.7,
                   delay: 0.8,
@@ -260,15 +286,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PROJETOS */}
       <Portfolio />
 
+      {/* SERVIÇOS */}
       <Services />
 
+      {/* SIMULADOR */}
       <Simulator />
 
+      {/* FORMULÁRIO */}
       <LeadForm />
+
+      {/* FAQ */}
       <FAQ />
-    <Footer />
+
+      {/* FOOTER */}
+      <Footer />
     </main>
   );
 }
