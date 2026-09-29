@@ -70,6 +70,8 @@ export default function Simulator() {
     return true;
   };
 
+  const progress = (step / totalSteps) * 100;
+
   return (
     <section
       id="orcamento"
@@ -82,52 +84,64 @@ export default function Simulator() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="mx-auto max-w-2xl text-center"
+          className="mx-auto max-w-3xl text-center"
         >
-         <span className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/5 px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
-  Orçamento
-</span>
+          <span className="inline-flex items-center rounded-full border border-orange-500/20 bg-orange-500/[0.08] px-4 py-2 text-sm font-medium uppercase tracking-[0.15em] text-orange-500">
+            Simulador de projeto
+          </span>
 
-<h2 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-  Vamos criar seu site.
-</h2>
+          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
+            Descubra como pode ser o seu{" "}
+            <span className="text-orange-500">site.</span>
+          </h2>
 
-<p className="mt-5 text-lg leading-8 text-white/50">
-  Responda 4 perguntas rápidas e veja uma estimativa inicial para o seu
-  projeto.
-</p>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/50">
+            Responda algumas perguntas rápidas para receber uma estimativa
+            inicial do seu projeto.
+          </p>
 
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-white/40">
-            <Check size={17} className="text-orange-500" />
-            Leva menos de 1 minuto
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/35">
+            <span className="flex items-center gap-2">
+              <Check size={15} className="text-orange-500" />
+              Rápido
+            </span>
+
+            <span className="flex items-center gap-2">
+              <Check size={15} className="text-orange-500" />
+              Sem compromisso
+            </span>
+
+            <span className="flex items-center gap-2">
+              <Check size={15} className="text-orange-500" />
+              A partir de R$497
+            </span>
           </div>
         </motion.div>
 
         {/* CARD */}
-        <div className="mx-auto mt-14 max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mx-auto mt-14 max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#101010] shadow-2xl shadow-black/20"
+        >
           {/* PROGRESSO */}
           {step <= totalSteps && (
-            <div className="border-b border-white/10 px-6 py-5 sm:px-8">
-              <div className="flex items-center justify-between text-sm">
+            <div className="border-b border-white/10 px-6 py-5 sm:px-10">
+              <div className="flex items-center justify-between">
                 <div>
-                  <span className="font-medium text-white">
+                  <p className="text-sm font-medium text-white/70">
                     Etapa {step} de {totalSteps}
-                  </span>
+                  </p>
 
-                 <span className="font-medium text-white">
-  Etapa {step} de {totalSteps}
-</span>
-
-<p className="mt-1 text-white/35">
-  {step === 1 && "Sobre seu negócio"}
-  {step === 2 && "Sobre o seu site"}
-  {step === 3 && "Domínio"}
-  {step === 4 && "Integração"}
-</p>
+                  <p className="mt-1 text-xs text-white/30">
+                    Leva menos de 1 minuto
+                  </p>
                 </div>
 
-                <span className="font-semibold text-orange-500">
-                  {Math.round((step / totalSteps) * 100)}%
+                <span className="text-sm font-semibold text-orange-500">
+                  {Math.round(progress)}%
                 </span>
               </div>
 
@@ -135,9 +149,12 @@ export default function Simulator() {
                 <motion.div
                   className="h-full rounded-full bg-orange-500"
                   animate={{
-                    width: `${(step / totalSteps) * 100}%`,
+                    width: `${progress}%`,
                   }}
-                  transition={{ duration: 0.4 }}
+                  transition={{
+                    duration: 0.4,
+                    ease: "easeOut",
+                  }}
                 />
               </div>
             </div>
@@ -154,23 +171,11 @@ export default function Simulator() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="mb-8">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-                      <Store size={22} />
-                    </div>
-
-                    <p className="mb-2 text-sm font-medium uppercase tracking-wider text-orange-500">
-                      Sobre seu negócio
-                    </p>
-
-                    <h3 className="text-2xl font-semibold sm:text-3xl">
-                      Qual é o seu tipo de negócio?
-                    </h3>
-
-                    <p className="mt-2 text-white/40">
-                      Vamos começar entendendo melhor o seu negócio.
-                    </p>
-                  </div>
+                  <QuestionHeader
+                    icon={<Store size={22} />}
+                    title="Qual é o seu tipo de negócio?"
+                    description="Escolha a opção que mais combina com sua empresa."
+                  />
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     {businessTypes.map((type) => (
@@ -178,7 +183,9 @@ export default function Simulator() {
                         key={type}
                         label={type}
                         selected={answers.business === type}
-                        onClick={() => updateAnswer("business", type)}
+                        onClick={() =>
+                          updateAnswer("business", type)
+                        }
                       />
                     ))}
                   </div>
@@ -194,23 +201,11 @@ export default function Simulator() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="mb-8">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-                      <Sparkles size={22} />
-                    </div>
-
-                    <p className="mb-2 text-sm font-medium uppercase tracking-wider text-orange-500">
-                      Sobre o seu site
-                    </p>
-
-                    <h3 className="text-2xl font-semibold sm:text-3xl">
-                      Que tipo de site você precisa?
-                    </h3>
-
-                    <p className="mt-2 text-white/40">
-                      Escolha a opção que mais se aproxima do que você imagina.
-                    </p>
-                  </div>
+                  <QuestionHeader
+                    icon={<Sparkles size={22} />}
+                    title="Que tipo de site você precisa?"
+                    description="Escolha a estrutura mais próxima do que você imagina."
+                  />
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     {websiteTypes.map((type) => (
@@ -218,7 +213,9 @@ export default function Simulator() {
                         key={type}
                         label={type}
                         selected={answers.website === type}
-                        onClick={() => updateAnswer("website", type)}
+                        onClick={() =>
+                          updateAnswer("website", type)
+                        }
                       />
                     ))}
                   </div>
@@ -234,38 +231,37 @@ export default function Simulator() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="mb-8">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-                      <Globe size={22} />
-                    </div>
-
-                    <p className="mb-2 text-sm font-medium uppercase tracking-wider text-orange-500">
-                      Domínio
-                    </p>
-
-                    <h3 className="text-2xl font-semibold sm:text-3xl">
-                      Você já possui um domínio?
-                    </h3>
-
-                    <p className="mt-2 text-white/40">
-                      Exemplo: seunegocio.com.br
-                    </p>
-                  </div>
+                  <QuestionHeader
+                    icon={<Globe size={22} />}
+                    title="Você já possui um domínio?"
+                    description="Por exemplo: seunegocio.com.br"
+                  />
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <Option
                       label="Sim, já tenho"
-                      selected={answers.domain === "Sim, já tenho"}
+                      selected={
+                        answers.domain === "Sim, já tenho"
+                      }
                       onClick={() =>
-                        updateAnswer("domain", "Sim, já tenho")
+                        updateAnswer(
+                          "domain",
+                          "Sim, já tenho"
+                        )
                       }
                     />
 
                     <Option
                       label="Não tenho ainda"
-                      selected={answers.domain === "Não tenho ainda"}
+                      selected={
+                        answers.domain ===
+                        "Não tenho ainda"
+                      }
                       onClick={() =>
-                        updateAnswer("domain", "Não tenho ainda")
+                        updateAnswer(
+                          "domain",
+                          "Não tenho ainda"
+                        )
                       }
                     />
                   </div>
@@ -281,36 +277,27 @@ export default function Simulator() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="mb-8">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-                      <MessageCircle size={22} />
-                    </div>
-
-                    <p className="mb-2 text-sm font-medium uppercase tracking-wider text-orange-500">
-                      Integração
-                    </p>
-
-                    <h3 className="text-2xl font-semibold sm:text-3xl">
-                      Precisa de integração com WhatsApp?
-                    </h3>
-
-                    <p className="mt-2 text-white/40">
-                      Uma forma simples de facilitar o contato dos seus
-                      clientes.
-                    </p>
-                  </div>
+                  <QuestionHeader
+                    icon={<MessageCircle size={22} />}
+                    title="Precisa de integração com WhatsApp?"
+                    description="Facilite o contato dos seus clientes diretamente pelo site."
+                  />
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <Option
                       label="Sim"
                       selected={answers.whatsapp === "Sim"}
-                      onClick={() => updateAnswer("whatsapp", "Sim")}
+                      onClick={() =>
+                        updateAnswer("whatsapp", "Sim")
+                      }
                     />
 
                     <Option
                       label="Não"
                       selected={answers.whatsapp === "Não"}
-                      onClick={() => updateAnswer("whatsapp", "Não")}
+                      onClick={() =>
+                        updateAnswer("whatsapp", "Não")
+                      }
                     />
                   </div>
                 </motion.div>
@@ -333,19 +320,20 @@ export default function Simulator() {
                     Estimativa inicial
                   </p>
 
-                  <h3 className="mt-4 text-5xl font-semibold tracking-tight">
+                  <h3 className="mt-4 text-5xl font-semibold tracking-tight sm:text-6xl">
                     A partir de R$497
                   </h3>
 
                   <p className="mx-auto mt-5 max-w-lg leading-7 text-white/50">
-                    Essa é uma estimativa inicial. O valor final depende da
-                    estrutura, funcionalidades e necessidades específicas do
-                    seu negócio.
+                    O valor final depende da estrutura,
+                    funcionalidades e necessidades específicas
+                    do seu negócio.
                   </p>
 
+                  {/* RESUMO */}
                   <div className="mx-auto mt-8 max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left">
-                    <p className="mb-3 text-sm font-medium text-white/40">
-                      Resumo do orçamento
+                    <p className="mb-2 text-xs font-medium uppercase tracking-[0.15em] text-white/30">
+                      Seu projeto
                     </p>
 
                     <Summary
@@ -369,6 +357,7 @@ export default function Simulator() {
                     />
                   </div>
 
+                  {/* CTA */}
                   <button
                     type="button"
                     onClick={() => {
@@ -379,13 +368,22 @@ export default function Simulator() {
 
                       document
                         .getElementById("contato")
-                        ?.scrollIntoView({ behavior: "smooth" });
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                        });
                     }}
-                    className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-400"
+                    className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-400 sm:w-auto"
                   >
                     Quero receber uma proposta
-                    <ArrowRight size={18} />
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </button>
+
+                  <p className="mt-4 text-xs text-white/25">
+                    Você poderá conversar diretamente pelo WhatsApp.
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -394,6 +392,7 @@ export default function Simulator() {
             {step <= totalSteps && (
               <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
                 <button
+                  type="button"
                   onClick={previousStep}
                   disabled={step === 1}
                   className="inline-flex items-center gap-2 text-sm font-medium text-white/40 transition hover:text-white disabled:pointer-events-none disabled:opacity-0"
@@ -403,19 +402,50 @@ export default function Simulator() {
                 </button>
 
                 <button
+                  type="button"
                   onClick={nextStep}
                   disabled={!canContinue()}
-                  className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="group inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  {step === totalSteps ? "Ver estimativa" : "Continuar"}
-                  <ArrowRight size={17} />
+                  {step === totalSteps
+                    ? "Ver estimativa"
+                    : "Continuar"}
+
+                  <ArrowRight
+                    size={17}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </button>
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function QuestionHeader({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="mb-8">
+      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
+        {icon}
+      </div>
+
+      <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        {title}
+      </h3>
+
+      <p className="mt-2 text-white/40">{description}</p>
+    </div>
   );
 }
 
@@ -432,7 +462,7 @@ function Option({
     <button
       type="button"
       onClick={onClick}
-      className={`flex min-h-16 items-center justify-between rounded-2xl border p-4 text-left transition ${
+      className={`group flex min-h-16 items-center justify-between rounded-2xl border p-4 text-left transition duration-200 ${
         selected
           ? "border-orange-500 bg-orange-500/10 text-white"
           : "border-white/10 bg-white/[0.02] text-white/70 hover:border-white/20 hover:bg-white/[0.04]"
@@ -441,13 +471,13 @@ function Option({
       <span className="font-medium">{label}</span>
 
       <span
-        className={`flex h-6 w-6 items-center justify-center rounded-full border ${
+        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition ${
           selected
-            ? "border-orange-500 bg-orange-500"
-            : "border-white/15 bg-white/[0.02]"
+            ? "border-orange-500 bg-orange-500 text-white"
+            : "border-white/10 bg-white/[0.03] text-transparent group-hover:border-white/20"
         }`}
       >
-        {selected && <Check size={14} />}
+        <Check size={14} />
       </span>
     </button>
   );
@@ -464,7 +494,9 @@ function Summary({
     <div className="flex items-center justify-between gap-4 border-b border-white/5 py-3 last:border-0">
       <span className="text-sm text-white/40">{label}</span>
 
-      <span className="text-right text-sm font-medium">{value}</span>
+      <span className="max-w-[60%] text-right text-sm font-medium">
+        {value}
+      </span>
     </div>
   );
 }

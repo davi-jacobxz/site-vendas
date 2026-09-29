@@ -212,6 +212,44 @@ export default function Home() {
       {/* FAQ */}
       <FAQ />
 
+      {/* CTA FINAL */}
+      <section className="relative overflow-hidden px-6 py-28 lg:px-8">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F76303]/10 blur-[130px]" />
+
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[32px] border border-[#F76303]/20 bg-gradient-to-br from-[#F76303]/10 via-white/[0.04] to-white/[0.02] px-8 py-16 text-center shadow-2xl shadow-black/40 sm:px-12 sm:py-20">
+          <span className="text-sm font-semibold uppercase tracking-[0.25em] text-[#F76303]">
+            Seu próximo projeto começa aqui
+          </span>
+
+          <h2 className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Seu negócio merece uma{" "}
+            <span className="text-[#F76303]">presença profissional.</span>
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
+            Crie seu site a partir de R$497 e comece a apresentar sua empresa
+            de uma forma mais profissional.
+          </p>
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="group mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-[#F76303] px-8 py-4 font-bold text-white shadow-lg shadow-[#F76303]/20 transition hover:scale-[1.03] hover:bg-[#ff6f18]"
+          >
+            Quero criar meu site
+            <ArrowRight
+              size={19}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </a>
+
+          <p className="mt-5 text-sm text-white/40">
+            Sem compromisso. Conte sua ideia e receba uma proposta.
+          </p>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <Footer />
     </main>
