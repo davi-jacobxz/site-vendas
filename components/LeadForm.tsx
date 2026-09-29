@@ -60,32 +60,35 @@ export default function LeadForm() {
     }
 
     // Rastreamento do envio do formulário.
-    // O generate_lead é o evento recomendado pelo GA4 para leads gerados por formulário.
+    // Se o gtag ainda não carregou, colocamos os eventos na fila do GA4.
     if (typeof window !== "undefined") {
-      const gtag = (
-        window as typeof window & {
-          gtag?: (...args: unknown[]) => void;
-        }
-      ).gtag;
+      const win = window as typeof window & {
+        dataLayer?: unknown[];
+        gtag?: (...args: unknown[]) => void;
+      };
 
-      if (typeof gtag === "function") {
-        console.log("[GA4] Lead enviado");
+      win.dataLayer = win.dataLayer || [];
 
-        gtag("event", "generate_lead", {
-          currency: "BRL",
-          value: 497,
-          lead_source: "site",
-          transport_type: "beacon",
+      const gtag =
+        win.gtag ||
+        ((...args: unknown[]) => {
+          win.dataLayer?.push(args);
         });
 
-        gtag("event", "lead_form_submit", {
-          event_category: "lead",
-          event_label: "Formulário de orçamento",
-          transport_type: "beacon",
-        });
-      } else {
-        console.warn("[GA4] gtag não está disponível no envio do formulário.");
-      }
+      console.log("[GA4] Lead enviado");
+
+      gtag("event", "generate_lead", {
+        currency: "BRL",
+        value: 497,
+        lead_source: "site",
+        transport_type: "beacon",
+      });
+
+      gtag("event", "lead_form_submit", {
+        event_category: "lead",
+        event_label: "Formulário de orçamento",
+        transport_type: "beacon",
+      });
     }
 
     const dominio =
