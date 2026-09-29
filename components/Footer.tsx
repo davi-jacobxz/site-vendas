@@ -13,8 +13,7 @@ export default function Footer(){
    <div className="mt-8 grid gap-4 border-t border-white/10 pt-6 text-xs text-white/30 sm:grid-cols-2">
     <div>
      <p>Ribeirão Preto — SP, Brasil</p>
-     <p className="mt-2">CNPJ/MEI: <span className="text-white/50">[PREENCHER]</span></p>
-     <p className="mt-2">E-mail: <span className="text-white/50">[PREENCHER]</span></p>
+     <p className="mt-2">Atendimento: <span className="text-white/50">(55 16) 99244-5413</span></p>
     </div>
     <div className="flex gap-5 sm:justify-end">
      <a href="/privacidade" className="hover:text-white">Política de Privacidade</a>
