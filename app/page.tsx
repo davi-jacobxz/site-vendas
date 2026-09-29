@@ -60,6 +60,6 @@ export default function Home(){
   <section className="relative overflow-hidden px-5 py-28 sm:px-8"><div className="relative mx-auto max-w-5xl rounded-[2.5rem] border border-[#F76303]/20 bg-[#0c0c0c] p-8 text-center sm:p-14"><Zap className="mx-auto text-[#F76303]" size={28}/><h2 className="mt-6 text-4xl font-black sm:text-6xl">Pare de adiar o site.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/45">Descubra em 1 minuto o que você precisa e dê o próximo passo.</p><a href="#orcamento" onClick={()=>track("simulador_cta_click",{location:"final"})} className="mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full bg-[#F76303] px-8 font-black">Simular meu site grátis <ArrowRight size={19}/></a></div></section>
 
   <Footer/>
-  <a href={whatsapp} target="_blank" rel="noopener noreferrer" onClick={()=>track("whatsapp_click",{location:"floating"})} aria-label="Falar no WhatsApp" className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl sm:hidden"><MessageCircle size={24}/></a>
- </main>;
+  <a href={whatsapp} target="_blank" rel="noopener noreferrer" onClick={()=>track("whatsapp_click",{location:"floating"})} aria-label="Falar no WhatsApp" className="fixed bottom-20 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl sm:hidden"><MessageCircle size={24}/></a>
+ <a href="#orcamento" className="fixed inset-x-0 bottom-0 z-30 flex h-14 items-center justify-center bg-[#F76303] text-sm font-black text-white sm:hidden">Simular meu site grátis</a>\n </main>;
 }
