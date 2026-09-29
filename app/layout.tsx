@@ -15,14 +15,25 @@ const analyticsScript="window.dataLayer=window.dataLayer||[];window.gtag=window.
 
 export const metadata:Metadata={
  metadataBase:new URL(SITE_URL),
- title:"JACOB. | Sites profissionais para negócios",
- description:"Descubra em 1 minuto quanto pode custar o site do seu negócio. Projetos a partir de R$497.",
+ title:"JACOB. | Descubra quanto custa o site do seu negócio",
+ description:"Simule em 1 minuto o projeto de site para seu negócio. JACOB. Websites & Digital.",
  keywords:["criação de sites","site profissional","landing page","site para pequenos negócios","Ribeirão Preto"],
  alternates:{canonical:"/"},
  robots:{index:true,follow:true},
  verification:{google:"Qm0xRLA1kJjQAVjDoViw8BTRM4_Tu5BcK125uFtznS0"},
- openGraph:{title:"JACOB. | Seu negócio precisa ser encontrado.",description:"Descubra em 1 minuto quanto pode custar o site do seu negócio.",url:SITE_URL,siteName:"JACOB.",locale:"pt_BR",type:"website"},
- twitter:{card:"summary_large_image",title:"JACOB. | Sites profissionais",description:"Descubra quanto pode custar o site do seu negócio."}
+ openGraph:{title:"JACOB. | Descubra quanto custa seu site",description:"Simule em 1 minuto o projeto de site para seu negócio.",url:SITE_URL,siteName:"JACOB. Websites & Digital",locale:"pt_BR",type:"website",images:[{url:"/og-image.svg",width:1200,height:630,alt:"JACOB. Websites & Digital"}]},
+ twitter:{card:"summary_large_image",title:"JACOB. | Sites para pequenos negócios",description:"Descubra quanto custa o site do seu negócio em 1 minuto.",images:["/og-image.svg"]}
+};
+
+const schema={
+ "@context":"https://schema.org",
+ "@type":"ProfessionalService",
+ name:"JACOB. Websites & Digital",
+ url:SITE_URL,
+ areaServed:"Brasil",
+ address:{"@type":"PostalAddress",addressLocality:"Ribeirão Preto",addressRegion:"SP",addressCountry:"BR"},
+ priceRange:"R$497+",
+ sameAs:["https://www.instagram.com/dev.jacobxz/"]
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}){
@@ -31,7 +42,10 @@ export default function RootLayout({children}:{children:React.ReactNode}){
    <Script id="google-consent-default" strategy="beforeInteractive">{consentScript}</Script>
    <Script src={"https://www.googletagmanager.com/gtag/js?id="+GA_ID} strategy="afterInteractive"/>
    <Script id="google-analytics" strategy="afterInteractive">{analyticsScript}{ADS_ID?"window.gtag('config','"+ADS_ID+"');":""}</Script>
-   <Tracking/>{children}<CookieConsent/>
+   <Tracking/>
+   {children}
+   <CookieConsent/>
+   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/>
   </body>
  </html>;
 }
