@@ -12,6 +12,13 @@ export async function POST(request:NextRequest){
   else current.count++;
   const body=await request.json();
   if(body.honeypot)return NextResponse.json({ok:true});
+  if(body.partial){
+   const nome=String(body.nome||"").trim(),whatsapp=String(body.whatsapp||"").replace(/\\D/g,"");
+   if(!nome||!/^[0-9]{11}$/.test(whatsapp))return NextResponse.json({ok:true});
+   const {error}=await supabase.from("lead_partials").insert({nome,whatsapp,utm_source:body.utm_source||null,utm_medium:body.utm_medium||null,utm_campaign:body.utm_campaign||null,utm_content:body.utm_content||null,utm_term:body.utm_term||null,fbclid:body.fbclid||null,gclid:body.gclid||null,landing_page:body.landing_page||null});
+   if(error)console.error("[LEAD_PARTIAL]",error);
+   return NextResponse.json({ok:true});
+  }
   const nome=String(body.nome||"").trim(),whatsapp=String(body.whatsapp||"").replace(/\D/g,"");
   if(!nome||!/^\d{11}$/.test(whatsapp))return NextResponse.json({error:"Nome e WhatsApp válidos são obrigatórios."},{status:400});
   const {error}=await supabase.from("leads").insert({
