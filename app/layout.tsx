@@ -14,26 +14,42 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://jacob-dev-sites.vercel.app";
+
 export const metadata: Metadata = {
-  title: "JACOB. | Websites & Digital",
+  metadataBase: new URL(SITE_URL),
+  title: "JACOB. | Criação de Sites Profissionais",
   description:
-    "Sites profissionais, modernos e responsivos para pequenos negócios. Projetos a partir de R$497.",
+    "Criação de sites profissionais, modernos e responsivos para empresas e pequenos negócios. Projetos a partir de R$497. Atendimento em Ribeirão Preto e para todo o Brasil.",
   keywords: [
     "criação de sites",
-    "site profissional",
+    "criação de sites Ribeirão Preto",
     "desenvolvimento de sites",
-    "sites para empresas",
+    "desenvolvimento de sites Ribeirão Preto",
+    "site profissional",
+    "site para empresa",
+    "site para pequenos negócios",
     "landing page",
-    "websites",
+    "sites responsivos",
     "JACOB",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   verification: {
     google: "Qm0xRLA1kJjQAVjDoViw8BTRM4_Tu5BcK125uFtznS0",
   },
   openGraph: {
-    title: "JACOB. | Websites & Digital",
+    title: "JACOB. | Criação de Sites Profissionais",
     description:
-      "Sites profissionais, modernos e responsivos para pequenos negócios.",
+      "Sites profissionais, modernos e responsivos para empresas e pequenos negócios. A partir de R$497.",
+    url: SITE_URL,
+    siteName: "JACOB.",
+    locale: "pt_BR",
     type: "website",
   },
 };
