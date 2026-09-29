@@ -81,17 +81,20 @@ export default function LeadForm() {
             integracaoWhatsapp || null,
         });
 
-      if (error) {
-        console.error("Erro ao salvar lead:", error);
+    if (error) {
+  console.error("ERRO COMPLETO DO SUPABASE:", {
+    message: error.message,
+    details: error.details,
+    hint: error.hint,
+    code: error.code,
+  });
 
-        alert(
-          "Não foi possível enviar seus dados agora. Tente novamente."
-        );
+  alert(
+    `Erro ao enviar: ${error.message || "erro desconhecido"}`
+  );
 
-        setEnviando(false);
-        return;
-      }
-
+  return;
+}
       setSucesso(true);
 
       const mensagem = `
