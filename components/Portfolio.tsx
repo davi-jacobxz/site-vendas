@@ -61,19 +61,16 @@ export default function Portfolio() {
           className="mb-16 max-w-3xl"
         >
           <span className="text-sm font-medium uppercase tracking-[0.2em] text-orange-500">
-            Portfólio
+            Projetos de demonstração
           </span>
 
           <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            Projetos que colocamos{" "}
-            <span className="text-orange-500">no ar.</span>
+            Projetos para demonstrar{" "}
+            <span className="text-orange-500">o trabalho.</span>
           </h2>
 
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/50">
-            Conheça alguns dos sites que desenvolvemos para
-            diferentes tipos de negócios, cada um com uma
-            proposta visual e estrutura pensadas para o
-            projeto.
+            Conheça alguns projetos desenvolvidos para demonstrar, na prática, diferentes estilos de site e possibilidades de estrutura para pequenos negócios.
           </p>
         </motion.div>
 
@@ -166,8 +163,7 @@ export default function Portfolio() {
             </p>
 
             <p className="mt-2 text-sm text-white/40">
-              Conte sua ideia e veja as possibilidades para
-              o seu site.
+              Conte sua ideia e veja como podemos criar seu site profissional.
             </p>
           </div>
 
