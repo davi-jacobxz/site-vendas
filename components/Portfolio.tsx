@@ -56,8 +56,7 @@ export default function Portfolio() {
         {/* CABEÇALHO */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-16 max-w-3xl"
         >
@@ -67,9 +66,7 @@ export default function Portfolio() {
 
           <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             Projetos que colocamos{" "}
-            <span className="text-orange-500">
-              no ar.
-            </span>
+            <span className="text-orange-500">no ar.</span>
           </h2>
 
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/50">
@@ -83,36 +80,24 @@ export default function Portfolio() {
         {/* PROJETOS */}
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project, index) => (
-            <motion.article
+            <article
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.08,
-              }}
               className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] transition duration-500 hover:-translate-y-1 hover:border-orange-500/30"
             >
               {/* PREVIEW */}
               <div
                 className={`relative aspect-[16/10] overflow-hidden bg-gradient-to-br ${project.accent}`}
               >
-                {/* Glow */}
                 <div className="absolute inset-0 bg-black/20" />
 
-                {/* Browser */}
                 <div className="absolute left-[7%] right-[7%] top-[8%] h-[84%] overflow-hidden rounded-2xl border border-white/10 bg-[#101010] shadow-2xl transition duration-700 group-hover:scale-[1.025]">
-                  {/* Browser header */}
                   <div className="flex h-8 items-center gap-1.5 border-b border-white/10 bg-white/[0.04] px-3">
                     <span className="h-2 w-2 rounded-full bg-white/20" />
                     <span className="h-2 w-2 rounded-full bg-white/20" />
                     <span className="h-2 w-2 rounded-full bg-white/20" />
-
                     <div className="ml-3 h-3 flex-1 rounded-full bg-white/5" />
                   </div>
 
-                  {/* Preview */}
                   <iframe
                     src={project.url}
                     title={`Preview do projeto ${project.title}`}
@@ -121,7 +106,6 @@ export default function Portfolio() {
                   />
                 </div>
 
-                {/* Number */}
                 <div className="absolute bottom-5 left-5 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 text-xs font-medium text-white/60 backdrop-blur-md">
                   0{index + 1}
                 </div>
@@ -165,15 +149,14 @@ export default function Portfolio() {
                   <ExternalLink size={15} />
                 </a>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mt-12 flex flex-col items-start justify-between gap-5 rounded-3xl border border-white/10 bg-white/[0.025] p-6 sm:flex-row sm:items-center sm:p-8"
         >
