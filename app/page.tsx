@@ -27,9 +27,9 @@ export default function Home() {
           <a href="#inicio" aria-label="JACOB. início" className="text-2xl font-black tracking-tight">
             JACOB<span className="text-[#F76303]">.</span>
           </a>
-          <a href="#orcamento" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F76303] px-5 py-2.5 text-sm font-black transition hover:bg-[#ff741c]">
-            Simular meu site
-            <ArrowRight size={16} />
+          <a href="https://wa.me/5516992445413?text=Oi%2C%20vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F76303] px-5 py-2.5 text-sm font-black transition hover:bg-[#ff741c]">
+            Falar no WhatsApp
+            <MessageCircle size={16} />
           </a>
         </div>
       </nav>
@@ -48,10 +48,16 @@ export default function Home() {
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/60 sm:mt-7 sm:text-lg sm:leading-8">
               Responda algumas perguntas e receba uma estimativa inicial para o seu projeto, sem compromisso.
             </p>
-            <a href="#orcamento" onClick={() => track("simulador_iniciado", { location: "hero" })} className="mt-6 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-[#F76303] px-7 py-4 text-base font-black text-black transition hover:bg-[#ff741c] sm:mt-8 sm:w-auto">
-              Simular meu site grátis
-              <ArrowRight size={19} />
-            </a>
+            <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row">
+              <a href="https://wa.me/5516992445413?text=Oi%2C%20vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_iniciado", { location: "hero" })} className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#F76303] px-7 py-4 text-base font-black text-black transition hover:bg-[#ff741c]">
+                Falar no WhatsApp
+                <MessageCircle size={19} />
+              </a>
+              <a href="#orcamento" onClick={() => track("simulador_iniciado", { location: "hero" })} className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-white/15 px-7 py-4 text-base font-black text-white transition hover:border-[#F76303] hover:text-[#F76303]">
+                Ver o orçamento
+                <ArrowRight size={19} />
+              </a>
+            </div>
             <div className="mt-6 grid gap-2.5 text-sm text-white/60 sm:mt-8 sm:grid-cols-3">
               {["A partir de R$497", "Feito para celular", "Publicação do site"].map((item) => (
                 <div key={item} className="flex items-center gap-2">
@@ -209,11 +215,11 @@ export default function Home() {
 
       <Footer />
 
-      <a href="#orcamento" onClick={() => track("simulador_iniciado", { location: "floating" })} aria-label="Simular meu site" className="fixed bottom-3 right-4 z-40 hidden h-14 items-center gap-2 rounded-full bg-[#F76303] px-5 font-black text-black shadow-2xl sm:flex md:bottom-6">
-        Simular meu site <ArrowRight size={18} />
+      <a href="https://wa.me/5516992445413?text=Oi%2C%20vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_iniciado", { location: "floating" })} aria-label="Falar no WhatsApp" className="fixed bottom-20 right-4 z-40 hidden h-14 items-center gap-2 rounded-full bg-[#F76303] px-5 font-black text-black shadow-2xl sm:flex md:bottom-6">
+        Falar no WhatsApp <MessageCircle size={18} />
       </a>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/95 p-3 backdrop-blur-xl sm:hidden">
-        <a href="#orcamento" onClick={() => track("simulador_iniciado", { location: "mobile_sticky" })} className="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#F76303] px-5 py-3 text-sm font-black text-black">Simular meu site <ArrowRight size={17}/></a>
+        <a href="https://wa.me/5516992445413?text=Oi%2C%20vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_iniciado", { location: "mobile_sticky" })} className="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#F76303] px-5 py-3 text-sm font-black text-black">Falar no WhatsApp <MessageCircle size={17}/></a>
       </div>
     </main>
   );
