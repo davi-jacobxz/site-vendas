@@ -13,7 +13,7 @@ export default function Footer(){
    <div className="mt-8 grid gap-4 border-t border-white/10 pt-6 text-xs text-white/30 sm:grid-cols-2">
     <div>
      <p>Ribeirão Preto — SP, Brasil</p>
-     <p className="mt-2">Atendimento: <span className="text-white/50">(55 16) 99244-5413</span></p><p className="mt-2">E-mail: <span className="text-white/50">davi.jacob.drio06@gmail.com</span></p>
+     <p className="mt-2">Atendimento: <a href="https://wa.me/5516992445413?text=Oi%2C%20vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" className="text-white/50 transition hover:text-[#F76303]">(55 16) 99244-5413</a></p><p className="mt-2">E-mail: <span className="text-white/50">davi.jacob.drio06@gmail.com</span></p>
     </div>
     <div className="flex gap-5 sm:justify-end">
      <a href="/privacidade" className="hover:text-white">Política de Privacidade</a>
