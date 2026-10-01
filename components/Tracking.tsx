@@ -30,7 +30,8 @@ export default function Tracking(){
     generate_lead:"Lead",
     lead:"Lead",
     contact:"Contact",
-    whatsapp_click:"Contact"
+    whatsapp_click:"Contact",
+    whatsapp_iniciado:"Contact"
    };
    const metaEvent=map[detail.name];
    if(metaEvent)fbq("track",metaEvent,detail.params);
