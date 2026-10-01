@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Loader2, MessageCircle, ShieldCheck } from "lucide-react";
 
 const businesses = ["Restaurante","Salão / Beleza","Clínica","Loja","Profissional autônomo","Outro"];
-const websites = ["Landing page","Página profissional","Site completo","Catálogo / Loja"];
+const websites = ["Site profissional completo"];
 const currents = ["Não tenho","Tenho mas quero refazer","Só tenho Instagram"];
 const deadlines = ["Agora","Nos próximos 30 dias","Só pesquisando"];
 const budgets = ["R$500 a R$1.000","R$1.000 a R$2.000","Acima de R$2.000","Prefiro conversar antes"];
@@ -48,8 +48,7 @@ function getScore(a:Answers){
 }
 
 function estimate(a:Answers){
-  if(a.website==="Landing page") return "A partir de R$497";
-  return "A partir de R$697";
+  return "A partir de R$467";
 }
 
 export default function Simulator(){
@@ -155,7 +154,7 @@ export default function Simulator(){
             <h2 className="mt-4 text-4xl font-black tracking-[-.04em] sm:text-5xl">Descubra em 1 minuto quanto custa o site do seu negócio.</h2>
             <p className="mt-5 text-lg leading-8 text-white/45">Uma pergunta por tela. No final, você recebe uma estimativa inicial e seus dados são registrados antes do WhatsApp.</p>
             <div className="mt-8 space-y-3 text-sm text-white/55">
-              {["Sem compromisso","A partir de R$497","Dados salvos antes do WhatsApp"].map(item=><div key={item} className="flex gap-3"><Check size={18} className="text-[#F76303]"/>{item}</div>)}
+              {["Sem compromisso","Site profissional completo por R$467","Dados salvos antes do WhatsApp"].map(item=><div key={item} className="flex gap-3"><Check size={18} className="text-[#F76303]"/>{item}</div>)}
             </div>
           </div>
 
