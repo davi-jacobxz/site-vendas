@@ -161,27 +161,30 @@ export default function Home() {
       </section>
 
       <section className="border-y border-white/5 bg-[#080808] px-5 py-24 sm:px-8">
-        <div className="mx-auto max-w-7xl">
-          <span className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Pacotes</span>
-          <h2 className="mt-4 text-4xl font-black sm:text-5xl">Escolha o nível de projeto que faz sentido.</h2>
-          <p className="mt-4 max-w-2xl text-white/45">Os valores abaixo são preços de entrada. O preço final é confirmado depois de entender o escopo, conteúdo e funcionalidades do projeto.</p>
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            {[
-              ["Landing Page", "A partir de R$497", "1–2 dias*", ["Uma página focada em uma oferta","Responsiva","WhatsApp","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; novas funcionalidades ou alterações fora do escopo também são orçadas separadamente."],
-              ["Página Profissional", "A partir de R$697", "2–3 dias*", ["Estrutura profissional para o negócio","Seções personalizadas","WhatsApp","SEO básico","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; textos e fotos devem ser fornecidos pelo cliente, e funcionalidades fora do escopo são orçadas separadamente."],
-              ["Site Completo", "A partir de R$897", "3–5 dias*", ["Mais páginas e funcionalidades","Estrutura personalizada","Integrações conforme necessidade","SEO básico","Publicação"], "Domínio e hospedagem são contratados e pagos à parte pelo cliente; sistemas complexos, integrações especiais e produção completa de conteúdo não fazem parte do valor inicial."],
-            ].map(([name, price, deadline, items, excluded]) => (
-              <div key={String(name)} className="flex flex-col rounded-3xl border border-white/10 bg-white/[.025] p-7">
-                <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">{name}</p>
-                <p className="mt-4 text-3xl font-black">{price}</p>
-                <p className="mt-2 text-xs font-bold uppercase tracking-[.14em] text-white/35">Prazo estimado: {deadline}</p>
-                <div className="mt-7 space-y-3">{(items as string[]).map((item) => <div key={item} className="flex gap-2 text-sm text-white/65"><Check size={17} className="mt-0.5 shrink-0 text-[#F76303]" />{item}</div>)}</div>
-                <div className="mt-7 border-t border-white/10 pt-5 text-xs leading-5 text-white/35">Não incluso: {excluded}</div>
-                <a href="#orcamento" className="mt-7 inline-flex min-h-11 items-center justify-center rounded-full bg-[#F76303] px-5 py-3 text-sm font-black text-black">Simular meu site</a>
-              </div>
-            ))}
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <span className="text-xs font-black uppercase tracking-[.2em] text-[#F76303]">Oferta</span>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">Seu site profissional, completo e pronto para vender.</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/45">Um site pensado para apresentar seu negócio, transmitir profissionalismo e facilitar o contato com seus clientes.</p>
           </div>
-          <p className="mt-5 text-xs text-white/30">* Referência de 1–2 dias para projetos dentro do escopo combinado. Projetos maiores ou com integrações podem exigir mais tempo.</p>
+          <div className="mx-auto mt-10 max-w-2xl rounded-3xl border border-[#F76303]/30 bg-white/[.025] p-7 sm:p-9">
+            <p className="text-sm font-black uppercase tracking-[.15em] text-[#F76303]">Site profissional completo</p>
+            <p className="mt-4 text-4xl font-black sm:text-5xl">A partir de R$467</p>
+            <p className="mt-2 text-xs font-bold uppercase tracking-[.14em] text-white/35">Prazo estimado: 2–5 dias*</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {["Site profissional e responsivo","Estrutura personalizada","WhatsApp","Páginas e seções necessárias","SEO básico","Publicação do site"].map((item) => (
+                <div key={item} className="flex gap-2 text-sm text-white/65">
+                  <Check size={17} className="mt-0.5 shrink-0 text-[#F76303]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 border-t border-white/10 pt-5 text-xs leading-5 text-white/35">
+              <strong className="text-white/50">Não incluso:</strong> domínio e hospedagem são contratados e pagos à parte pelo cliente. Funcionalidades ou alterações fora do escopo combinado são orçadas separadamente.
+            </div>
+            <a href="#orcamento" className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#F76303] px-5 py-3 text-sm font-black text-black transition hover:bg-[#ff741c]">Quero meu site por R$467</a>
+          </div>
+          <p className="mt-5 text-center text-xs text-white/30">* Prazo de referência para projetos dentro do escopo combinado. Projetos maiores ou com integrações podem exigir mais tempo.</p>
         </div>
       </section>
 
